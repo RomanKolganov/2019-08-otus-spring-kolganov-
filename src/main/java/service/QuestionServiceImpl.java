@@ -2,6 +2,9 @@ package service;
 
 import dao.QuestionDAO;
 import domain.Question;
+import domain.ResourceLoader;
+
+import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService{
     private QuestionDAO dao;
@@ -10,7 +13,7 @@ public class QuestionServiceImpl implements QuestionService{
         this.dao = dao;
     }
 
-    public Question getById(int id) {
-        return dao.finById(id);
+    public List<Question> getAll(ResourceLoader resourceLoader) {
+        return dao.findAll(resourceLoader);
     }
 }

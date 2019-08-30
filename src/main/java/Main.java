@@ -1,7 +1,6 @@
-import domain.Answer;
 import domain.Question;
+import domain.ResourceLoader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import service.AnswerService;
 import service.QuestionService;
 
 import java.util.List;
@@ -11,14 +10,16 @@ public class Main {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
 
         QuestionService questionService = context.getBean(QuestionService.class);
-        AnswerService answerService = context.getBean(AnswerService.class);
+        ResourceLoader resourceLoader = context.getBean(ResourceLoader.class);
 
-        Question question = questionService.getById(1);
-        List<Answer> answers = answerService.getById(1);
+        List<Question> questions = questionService.getAll(resourceLoader);
 
-        System.out.println(question.getText());
-        for (Answer a : answers) {
-            System.out.println(a.getText());
+        for (Question q : questions) {
+            System.out.println(q.getText());
+            System.out.println(q.getAnswer1());
+            System.out.println(q.getAnswer2());
+            System.out.println(q.getAnswer3());
+            System.out.println(q.getAnswer4());
         }
     }
 }
