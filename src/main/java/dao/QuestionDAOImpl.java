@@ -51,6 +51,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                 new NotNull(),
                 new NotNull(),
                 new NotNull(),
+                new NotNull(),
         };
     }
 }

@@ -7,15 +7,7 @@ public class Question {
     private String answer2;
     private String answer3;
     private String answer4;
-
-    public Question(int id, String text, String answer1, String answer2, String answer3, String answer4) {
-        this.id = id;
-        this.text = text;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.answer4 = answer4;
-    }
+    private String correctAnswer;
 
     public Question() {
     }
@@ -66,5 +58,13 @@ public class Question {
 
     public void setAnswer4(String answer4) {
         this.answer4 = answer4;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 }
