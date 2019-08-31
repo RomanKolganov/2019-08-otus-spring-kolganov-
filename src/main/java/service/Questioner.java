@@ -9,13 +9,11 @@ public class Questioner {
 
     public String askString() {
         String s = "";
-
         try {
             s = reader.readLine();
-
-            if (!s.matches("[a-zA-Zа-яА-Я]+")) {
+            while (!s.matches("[a-zA-Zа-яА-Я]+")) {
                 System.out.println("Не вводи цифры!");
-                askString();
+                s = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,9 +27,9 @@ public class Questioner {
         try {
             s = reader.readLine();
 
-            if (!s.matches("[1-4]")) {
+            while (!s.matches("[1-4]")) {
                 System.out.println("Только цифры от 1 до 4");
-                askNumber();
+                s = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
