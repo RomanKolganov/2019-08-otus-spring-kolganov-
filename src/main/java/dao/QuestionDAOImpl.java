@@ -15,12 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDAOImpl implements QuestionDAO {
-    public List<Question> findAll(ResourceLoader resourceLoader) {
+    private ResourceLoader loader;
+
+    public QuestionDAOImpl(ResourceLoader loader) {
+        this.loader = loader;
+    }
+
+    public List<Question> findAll() {
         List<Question> questions = new ArrayList<Question>();
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(resourceLoader.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+            beanReader = new CsvBeanReader(new FileReader(loader.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
 
             final String[] header = beanReader.getHeader(true);
             final CellProcessor[] processors = getProcessors();

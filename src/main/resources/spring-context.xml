@@ -5,6 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="questionDao" class="dao.QuestionDAOImpl">
+        <constructor-arg name="loader" ref="resourceLoader"/>
     </bean>
 
     <bean id="questionService" class="service.QuestionServiceImpl">

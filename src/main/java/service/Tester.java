@@ -8,13 +8,10 @@ public class Tester {
     public void startTesting(List<Question> questions) {
         Questioner questioner = new Questioner();
 
-        String name;
-        String surname;
-
         System.out.println("Введите свое имя:");
-        name = questioner.askString();
+        String name = questioner.askString();
         System.out.println("Введите свою фамилию:");
-        surname = questioner.askString();
+        String surname = questioner.askString();
         System.out.println(String.format("Поздравляю, %s %s, ты справился.", name, surname));
         System.out.println("Теперь проходи тест на знание фильма Джей и молчаливый боб наносят ответный удар");
         System.out.println();
