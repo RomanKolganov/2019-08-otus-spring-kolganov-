@@ -2,6 +2,7 @@ package dao;
 
 import domain.Question;
 import domain.ResourceLoader;
+import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.ift.CellProcessor;
@@ -14,8 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class QuestionDAOImpl implements QuestionDAO {
-    private ResourceLoader loader;
+
+    private final ResourceLoader loader;
 
     public QuestionDAOImpl(ResourceLoader loader) {
         this.loader = loader;

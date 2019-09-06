@@ -2,11 +2,13 @@ package service;
 
 import dao.QuestionDAO;
 import domain.Question;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuestionServiceImpl implements QuestionService{
-    private QuestionDAO dao;
+    private final QuestionDAO dao;
 
     public QuestionServiceImpl(QuestionDAO dao) {
         this.dao = dao;
