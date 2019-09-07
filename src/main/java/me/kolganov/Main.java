@@ -1,10 +1,11 @@
-import domain.Question;
+package me.kolganov;
+
+import me.kolganov.domain.Question;
+import me.kolganov.service.QuestionService;
+import me.kolganov.service.Tester;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import service.QuestionService;
-import service.Tester;
 
 import java.util.List;
 

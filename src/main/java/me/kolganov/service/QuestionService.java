@@ -1,6 +1,6 @@
-package service;
+package me.kolganov.service;
 
-import domain.Question;
+import me.kolganov.domain.Question;
 
 import java.util.List;
 

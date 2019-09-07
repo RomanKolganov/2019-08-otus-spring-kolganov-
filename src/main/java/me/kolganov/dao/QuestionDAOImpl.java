@@ -1,8 +1,7 @@
-package dao;
+package me.kolganov.dao;
 
-import domain.Question;
-import domain.ResourceLoader;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.kolganov.domain.Question;
+import me.kolganov.domain.ResourceLoader;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -20,7 +19,6 @@ import java.util.List;
 public class QuestionDAOImpl implements QuestionDAO {
     private final ResourceLoader loader;
 
-    @Autowired
     public QuestionDAOImpl(ResourceLoader loader) {
         this.loader = loader;
     }

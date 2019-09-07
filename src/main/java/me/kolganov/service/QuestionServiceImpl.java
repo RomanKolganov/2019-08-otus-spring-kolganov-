@@ -1,8 +1,7 @@
-package service;
+package me.kolganov.service;
 
-import dao.QuestionDAO;
-import domain.Question;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.kolganov.dao.QuestionDAO;
+import me.kolganov.domain.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService{
     private final QuestionDAO dao;
 
-    @Autowired
     public QuestionServiceImpl(QuestionDAO dao) {
         this.dao = dao;
     }
