@@ -5,5 +5,5 @@ import me.kolganov.domain.Question;
 import java.util.List;
 
 public interface QuestionService {
-    List<Question> getAll();
+    List<Question> getByLocale(String locale);
 }

@@ -1,7 +1,9 @@
 package me.kolganov.dao;
 
 import me.kolganov.domain.Question;
-import me.kolganov.domain.ResourceLoader;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -16,19 +18,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@PropertySource("classpath:app.properties")
 public class QuestionDAOImpl implements QuestionDAO {
-    private final ResourceLoader loader;
+    @Value("${file.path_en}")
+    private Resource resource_en;
+    @Value("${file.path_ru}")
+    private Resource resource_ru;
 
-    public QuestionDAOImpl(ResourceLoader loader) {
-        this.loader = loader;
-    }
-
-    public List<Question> findAll() {
-        List<Question> questions = new ArrayList<Question>();
+    public List<Question> findByLocale(String locale) {
+        List<Question> questions = new ArrayList<>();
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(loader.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+            switch (locale) {
+                case "en":
+                    beanReader = new CsvBeanReader(new FileReader(resource_en.getFile()), CsvPreference.STANDARD_PREFERENCE);
+                    break;
+                case "ru":
+                    beanReader = new CsvBeanReader(new FileReader(resource_ru.getFile()), CsvPreference.STANDARD_PREFERENCE);
+                    break;
+                default:
+                    beanReader = new CsvBeanReader(new FileReader(resource_ru.getFile()), CsvPreference.STANDARD_PREFERENCE);
+            }
+
 
             final String[] header = beanReader.getHeader(true);
             final CellProcessor[] processors = getProcessors();
