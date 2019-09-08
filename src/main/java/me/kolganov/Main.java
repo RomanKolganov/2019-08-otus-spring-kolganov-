@@ -3,7 +3,6 @@ package me.kolganov;
 import me.kolganov.domain.Question;
 import me.kolganov.service.QuestionService;
 import me.kolganov.service.Tester;
-import me.kolganov.service.TesterImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
