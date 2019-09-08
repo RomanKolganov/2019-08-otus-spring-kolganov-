@@ -3,11 +3,13 @@ package me.kolganov;
 import me.kolganov.domain.Question;
 import me.kolganov.service.QuestionService;
 import me.kolganov.service.Tester;
+import me.kolganov.service.TesterImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import java.util.Locale;
 
 @Configuration
 @ComponentScan
@@ -20,7 +22,8 @@ public class Main {
 
         List<Question> questions = questionService.getAll();
 
-        Tester tester = new Tester();
+        Tester tester = context.getBean(Tester.class);
+        tester.setLocale(Locale.ENGLISH);
         tester.startTesting(questions);
     }
 }

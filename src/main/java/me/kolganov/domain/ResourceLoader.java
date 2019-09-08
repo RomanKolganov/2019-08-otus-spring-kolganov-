@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource("classpath:app.properties")
 public class ResourceLoader {
-    @Value("${file.path}")
+    @Value("${file.path_ru}")
     private Resource resource;
 
     public Resource getResource() {
