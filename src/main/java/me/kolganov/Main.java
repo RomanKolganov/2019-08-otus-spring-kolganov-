@@ -19,10 +19,10 @@ public class Main {
 
         QuestionService questionService = context.getBean(QuestionService.class);
 
-        List<Question> questions = questionService.getByLocale("ru");// "ru" или "en"
+        List<Question> questions = questionService.getByLocale("en");// "ru" или "en"
 
         Tester tester = context.getBean(Tester.class);
-        tester.setLocale(new Locale("ru", "RU"));
+        tester.setLocale(Locale.ENGLISH);
         tester.startTesting(questions);
     }
 }
