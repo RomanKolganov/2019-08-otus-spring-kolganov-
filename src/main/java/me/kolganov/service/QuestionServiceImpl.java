@@ -14,7 +14,7 @@ public class QuestionServiceImpl implements QuestionService{
         this.dao = dao;
     }
 
-    public List<Question> getByLocale(String locale) {
-        return dao.findByLocale(locale);
+    public List<Question> getByLocale() {
+        return dao.findByLocale();
     }
 }

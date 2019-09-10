@@ -20,26 +20,15 @@ import java.util.List;
 @Repository
 @PropertySource("classpath:app.properties")
 public class QuestionDAOImpl implements QuestionDAO {
-    @Value("${file.path_en}")
-    private Resource resource_en;
-    @Value("${file.path_ru}")
-    private Resource resource_ru;
+    @Value("${" + "${file}" + "${locale}" + "}")
+    private Resource resource;
 
-    public List<Question> findByLocale(String locale) {
+    public List<Question> findByLocale() {
         List<Question> questions = new ArrayList<>();
 
         ICsvBeanReader beanReader = null;
         try {
-            switch (locale) {
-                case "en":
-                    beanReader = new CsvBeanReader(new FileReader(resource_en.getFile()), CsvPreference.STANDARD_PREFERENCE);
-                    break;
-                case "ru":
-                    beanReader = new CsvBeanReader(new FileReader(resource_ru.getFile()), CsvPreference.STANDARD_PREFERENCE);
-                    break;
-                default:
-                    beanReader = new CsvBeanReader(new FileReader(resource_ru.getFile()), CsvPreference.STANDARD_PREFERENCE);
-            }
+            beanReader = new CsvBeanReader(new FileReader(resource.getFile()), CsvPreference.STANDARD_PREFERENCE);
 
 
             final String[] header = beanReader.getHeader(true);

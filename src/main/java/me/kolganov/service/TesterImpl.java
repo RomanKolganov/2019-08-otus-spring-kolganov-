@@ -1,106 +1,43 @@
 package me.kolganov.service;
 
 import me.kolganov.domain.Question;
-import org.springframework.context.MessageSource;
+import me.kolganov.utils.Constants;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class TesterImpl implements Tester {
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private IOService ioService;
 
-    private MessageSource messageSource;
-    private Locale locale;
-
-    public TesterImpl(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public TesterImpl(IOService ioService) {
+        this.ioService = ioService;
     }
 
     public void startTesting(List<Question> questions) {
-        writeMessage("name");
-        String name = askString();
+        ioService.writeMessage(Constants.NAME);
+        String name = ioService.askString();
 
-        writeMessage("surname");
-        String surname = askString();
+        ioService.writeMessage(Constants.SURNAME);
+        String surname = ioService.askString();
 
-        writeMessage("grats", name, surname);
-        writeMessage("startTest");
+        ioService.writeMessage(Constants.GRATS, name, surname);
+        ioService.writeMessage(Constants.START_TEST);
 
         int counter = 0;
         for (Question q : questions) {
-            writeQuestion(q);
-            writeAnswers(q);
+            ioService.writeQuestion(q);
+            ioService.writeAnswers(q);
 
-            String answer = askNumber();
+            String answer = ioService.askNumber();
 
             if (answer.equals(q.getCorrectAnswer())) {
-                writeMessage("correct");
+                ioService.writeMessage(Constants.CORRECT);
                 counter++;
             } else {
-                writeMessage("notCorrect");
+                ioService.writeMessage(Constants.NOT_CORRECT);
             }
         }
-        writeMessage("result", counter, questions.size());
-    }
-
-    private String askString() {
-        String s = "";
-        try {
-            s = reader.readLine();
-            while (!s.matches("[a-zA-Zа-яА-Я]+")) {
-                writeMessage("letters");
-                s = reader.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return s;
-    }
-
-    private String askNumber() {
-        String s = "";
-
-        try {
-            s = reader.readLine();
-
-            while (!s.matches("[1-4]")) {
-                writeMessage("numbers");
-                s = reader.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return s;
-    }
-
-    private void writeMessage(String key) {
-        System.out.println(messageSource.getMessage(key, null, locale));
-    }
-
-    private void writeMessage(String key, Object... s) {
-        System.out.println(String.format(messageSource.getMessage(key, null, locale), (Object[]) s));
-    }
-
-    private void writeQuestion(Question question) {
-        writeMessage("question");
-        System.out.println(question.getText());
-        System.out.println();
-    }
-
-    private void writeAnswers(Question question) {
-        writeMessage("answer");
-        System.out.println(question.getAnswer1());
-        System.out.println(question.getAnswer2());
-        System.out.println(question.getAnswer3());
-        System.out.println(question.getAnswer4());
+        ioService.writeMessage(Constants.RESULT, counter, questions.size());
     }
 }
