@@ -1,7 +1,7 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
-import me.kolganov.dao.QuestionDAO;
-import me.kolganov.domain.Question;
+import me.kolganov.studentTestApplication.dao.QuestionDAO;
+import me.kolganov.studentTestApplication.domain.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

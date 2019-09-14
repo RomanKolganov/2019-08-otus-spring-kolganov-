@@ -1,4 +1,4 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

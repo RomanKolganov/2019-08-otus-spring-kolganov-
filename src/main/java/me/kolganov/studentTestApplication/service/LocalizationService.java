@@ -1,4 +1,4 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
 public interface LocalizationService {
     String getMessage(String key);
