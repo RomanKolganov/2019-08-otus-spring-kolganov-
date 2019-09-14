@@ -2,7 +2,6 @@ package me.kolganov.studentTestApplication.dao;
 
 import me.kolganov.studentTestApplication.domain.Question;
 import me.kolganov.studentTestApplication.service.SettingsService;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@PropertySource("classpath:application.properties")
 public class QuestionDAOImpl implements QuestionDAO {
     private SettingsService settingsService;
 
