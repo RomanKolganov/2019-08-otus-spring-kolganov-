@@ -1,6 +1,6 @@
-package dao;
+package me.kolganov.dao;
 
-import domain.Question;
+import me.kolganov.domain.Question;
 
 import java.util.List;
 

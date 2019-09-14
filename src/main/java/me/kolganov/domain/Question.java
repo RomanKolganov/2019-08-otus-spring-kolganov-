@@ -1,4 +1,4 @@
-package domain;
+package me.kolganov.domain;
 
 public class Question {
     private int id;

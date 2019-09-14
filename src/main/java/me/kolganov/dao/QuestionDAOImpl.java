@@ -1,7 +1,8 @@
-package dao;
+package me.kolganov.dao;
 
-import domain.Question;
-import domain.ResourceLoader;
+import me.kolganov.domain.Question;
+import me.kolganov.service.SettingsService;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -16,20 +17,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@PropertySource("classpath:app.properties")
 public class QuestionDAOImpl implements QuestionDAO {
+    private SettingsService settingsService;
 
-    private final ResourceLoader loader;
-
-    public QuestionDAOImpl(ResourceLoader loader) {
-        this.loader = loader;
+    public QuestionDAOImpl(SettingsService settingsService) {
+        this.settingsService = settingsService;
     }
 
     public List<Question> findAll() {
-        List<Question> questions = new ArrayList<Question>();
+        List<Question> questions = new ArrayList<>();
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(loader.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+            beanReader = new CsvBeanReader(new FileReader(settingsService.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+
 
             final String[] header = beanReader.getHeader(true);
             final CellProcessor[] processors = getProcessors();

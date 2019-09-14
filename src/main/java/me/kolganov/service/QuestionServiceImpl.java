@@ -1,7 +1,7 @@
-package service;
+package me.kolganov.service;
 
-import dao.QuestionDAO;
-import domain.Question;
+import me.kolganov.dao.QuestionDAO;
+import me.kolganov.domain.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class QuestionServiceImpl implements QuestionService{
         this.dao = dao;
     }
 
-    public List<Question> getAll() {
+    public List<Question> getByLocale() {
         return dao.findAll();
     }
 }
