@@ -1,9 +1,8 @@
 package me.kolganov.dao;
 
 import me.kolganov.domain.Question;
-import org.springframework.beans.factory.annotation.Value;
+import me.kolganov.service.SettingsService;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -20,15 +19,18 @@ import java.util.List;
 @Repository
 @PropertySource("classpath:app.properties")
 public class QuestionDAOImpl implements QuestionDAO {
-    @Value("${" + "${file}" + "${locale}" + "}")
-    private Resource resource;
+    private SettingsService settingsService;
 
-    public List<Question> findByLocale() {
+    public QuestionDAOImpl(SettingsService settingsService) {
+        this.settingsService = settingsService;
+    }
+
+    public List<Question> findAll() {
         List<Question> questions = new ArrayList<>();
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(resource.getFile()), CsvPreference.STANDARD_PREFERENCE);
+            beanReader = new CsvBeanReader(new FileReader(settingsService.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
 
 
             final String[] header = beanReader.getHeader(true);

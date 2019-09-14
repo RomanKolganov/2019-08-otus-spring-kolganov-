@@ -1,5 +1,5 @@
 package me.kolganov.service;
 
-public interface MessageSourceWrapper {
+public interface LocalizationService {
     String getMessage(String key);
 }

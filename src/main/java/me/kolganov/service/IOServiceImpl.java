@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
 @Service
 public class IOServiceImpl implements IOService {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private MessageSourceWrapper messageSource;
+    private LocalizationService messageSource;
 
-    public IOServiceImpl(MessageSourceWrapper messageSource) {
+    public IOServiceImpl(LocalizationService messageSource) {
         this.messageSource = messageSource;
     }
 
