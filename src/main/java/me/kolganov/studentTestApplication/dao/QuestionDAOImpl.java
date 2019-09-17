@@ -12,6 +12,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(settings.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+            beanReader = new CsvBeanReader(new InputStreamReader(settings.getResource().getInputStream()), CsvPreference.STANDARD_PREFERENCE);
 
 
             final String[] header = beanReader.getHeader(true);
