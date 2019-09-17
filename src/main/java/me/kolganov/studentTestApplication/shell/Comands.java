@@ -16,7 +16,7 @@ public class Comands {
         this.tester = tester;
     }
 
-    @ShellMethod(value = "Authorization", key = {"auth"})
+    @ShellMethod(value = "Authorization", key = {"auth", "au"})
     public void auth() {
         isAuth = tester.auth();
     }

@@ -1,4 +1,4 @@
-locale: ru  #ru или en
+locale: en  #ru или en
 file_name: file.path_
 file:
   path_en: classpath:questions_en_EN.csv

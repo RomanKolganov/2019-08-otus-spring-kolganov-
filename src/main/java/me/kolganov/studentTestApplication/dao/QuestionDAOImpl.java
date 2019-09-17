@@ -1,7 +1,7 @@
 package me.kolganov.studentTestApplication.dao;
 
+import me.kolganov.studentTestApplication.config.Settings;
 import me.kolganov.studentTestApplication.domain.Question;
-import me.kolganov.studentTestApplication.service.SettingsService;
 import org.springframework.stereotype.Repository;
 import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -17,10 +17,10 @@ import java.util.List;
 
 @Repository
 public class QuestionDAOImpl implements QuestionDAO {
-    private SettingsService settingsService;
+    private Settings settings;
 
-    public QuestionDAOImpl(SettingsService settingsService) {
-        this.settingsService = settingsService;
+    public QuestionDAOImpl(Settings settings) {
+        this.settings = settings;
     }
 
     public List<Question> findAll() {
@@ -28,7 +28,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 
         ICsvBeanReader beanReader = null;
         try {
-            beanReader = new CsvBeanReader(new FileReader(settingsService.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
+            beanReader = new CsvBeanReader(new FileReader(settings.getResource().getFile()), CsvPreference.STANDARD_PREFERENCE);
 
 
             final String[] header = beanReader.getHeader(true);
