@@ -1,4 +1,4 @@
-package me.kolganov.utils;
+package me.kolganov.studentTestApplication.utils;
 
 public class Constants {
     public static final String ANSWER = "answer";

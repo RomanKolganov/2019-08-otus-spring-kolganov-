@@ -1,10 +1,9 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
-import me.kolganov.domain.Question;
+import me.kolganov.studentTestApplication.domain.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class RunnerImpl implements Runner {

@@ -1,6 +1,6 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
-import me.kolganov.domain.Question;
+import me.kolganov.studentTestApplication.domain.Question;
 
 public interface IOService {
     void writeMessage(String key);

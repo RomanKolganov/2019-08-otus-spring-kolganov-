@@ -1,4 +1,4 @@
-package me.kolganov.domain;
+package me.kolganov.studentTestApplication.domain;
 
 public class Question {
     private int id;

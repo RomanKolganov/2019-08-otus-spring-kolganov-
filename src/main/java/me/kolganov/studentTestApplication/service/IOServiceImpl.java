@@ -1,7 +1,7 @@
-package me.kolganov.service;
+package me.kolganov.studentTestApplication.service;
 
-import me.kolganov.domain.Question;
-import me.kolganov.utils.Constants;
+import me.kolganov.studentTestApplication.domain.Question;
+import me.kolganov.studentTestApplication.utils.Constants;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
