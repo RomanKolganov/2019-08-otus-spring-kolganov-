@@ -74,4 +74,9 @@ public class IOServiceImpl implements IOService {
         }
         return s;
     }
+
+    @Override
+    public String getLocalizedString(String key) {
+        return messageSource.getMessage(key);
+    }
 }

@@ -12,4 +12,5 @@ public class Constants {
     public static final String RESULT = "result";
     public static final String START_TEST = "startTest";
     public static final String SURNAME = "surname";
+    public static final String AUTH = "auth";
 }

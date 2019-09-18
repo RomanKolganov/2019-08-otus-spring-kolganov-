@@ -10,4 +10,5 @@ public interface IOService {
 
     String askString();
     String askNumber();
+    String getLocalizedString(String key);
 }
