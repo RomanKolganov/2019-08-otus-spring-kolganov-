@@ -7,10 +7,9 @@ public class Author {
     private String name;
     private List<Book> books;
 
-    public Author(long id, String name, List<Book> books) {
+    public Author(long id, String name) {
         this.id = id;
         this.name = name;
-        this.books = books;
     }
 
     public Author() {
