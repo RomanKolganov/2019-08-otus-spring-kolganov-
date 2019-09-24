@@ -8,6 +8,8 @@ public interface BookDAO {
     List<Book> findAll();
     Book findById(long id);
     void create(Book book);
-    void update(Book book);
-    void delete(Book book);
+    void updateName(Book book);
+    void updateAuthor(Book book);
+    void updateGenre(Book book);
+    void deleteById(long id);
 }

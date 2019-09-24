@@ -7,10 +7,16 @@ public class Genre {
     private String name;
     private List<Book> books;
 
-    public Genre(long id, String name, List<Book> books) {
+    public Genre(long id, String name) {
         this.id = id;
         this.name = name;
-        this.books = books;
+    }
+
+    public Genre(long id) {
+        this.id = id;
+    }
+
+    public Genre(){
     }
 
     public long getId() {
@@ -21,7 +27,19 @@ public class Genre {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Book> getBooks() {
         return books;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

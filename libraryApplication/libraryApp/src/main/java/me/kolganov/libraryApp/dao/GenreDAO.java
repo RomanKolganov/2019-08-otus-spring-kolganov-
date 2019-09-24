@@ -9,5 +9,5 @@ public interface GenreDAO {
     Genre findById(long id);
     void create(Genre genre);
     void update(Genre genre);
-    void delete(Genre genre);
+    void deleteById(long id);
 }

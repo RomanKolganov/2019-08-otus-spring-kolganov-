@@ -31,11 +31,7 @@ public class AuthorShell {
 
     @ShellMethod(value = "Update author by id", key = {"update-author", "ua"})
     public void updateAuthor(@ShellOption long id, String name) {
-        Author author = new Author();
-        author.setId(id);
-        author.setName(name);
-
-        service.update(author);
+        service.update(new Author(id, name));
     }
 
     @ShellMethod(value = "Delete author by id", key = {"delete-author", "da"})

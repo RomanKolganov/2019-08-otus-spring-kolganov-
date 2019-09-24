@@ -33,7 +33,10 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void create(Genre genre) {
+    public void create(String name) {
+        Genre genre = new Genre();
+        genre.setName(name);
+
         dao.create(genre);
     }
 
@@ -43,7 +46,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void delete(Genre genre) {
-        dao.delete(genre);
+    public void delete(long id) {
+        dao.deleteById(id);
     }
 }
