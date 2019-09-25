@@ -34,4 +34,32 @@ class AuthorDAOJdbcTest {
         Author author = daoJdbc.findById(1);
         assertThat(author).isNotNull().matches(s -> s.getName().equals("Пушкин А.С."));
     }
+
+    @DisplayName("должен вставлять запись и извлекать ее из БД")
+    @Test
+    void createTest() {
+        Author authorToSave = new Author();
+        authorToSave.setName("testAuthor");
+        daoJdbc.create(authorToSave);
+
+        Author authorFromDb = daoJdbc.findById(3);
+
+        assertThat(authorFromDb).isNotNull()
+                .matches(s -> s.getName().equals(authorToSave.getName()));
+    }
+
+    @DisplayName("должен изменять имя автора")
+    @Test
+    void updateTest() {
+        String newName = "testName";
+
+        Author author = daoJdbc.findById(1);
+        author.setName(newName);
+
+        daoJdbc.update(author);
+
+        Author newAuthor = daoJdbc.findById(1);
+        assertThat(newAuthor).isNotNull()
+                .matches(s -> s.getName().equals(newName));
+    }
 }
