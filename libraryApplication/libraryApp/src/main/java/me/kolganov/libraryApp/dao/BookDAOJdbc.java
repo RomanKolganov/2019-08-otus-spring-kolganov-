@@ -32,7 +32,10 @@ public class BookDAOJdbc implements BookDAO {
     @Override
     public Book findById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        return jdbcOperations.queryForObject("select * from books where id = :id", params, new BookMapper());
+        return jdbcOperations.queryForObject("select b.*, a.name as author_name, g.name as genre_name from books b " +
+                "left join authors a on a.id = b.author_id " +
+                "left join genres g on g.id = b.genre_id " +
+                "where b.id = :id", params, new BookMapper());
     }
 
     @Override

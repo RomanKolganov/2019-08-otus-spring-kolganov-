@@ -16,15 +16,15 @@ public class Author {
         this.id = id;
     }
 
+    public Author(String name) {
+        this.name = name;
+    }
+
     public Author() {
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

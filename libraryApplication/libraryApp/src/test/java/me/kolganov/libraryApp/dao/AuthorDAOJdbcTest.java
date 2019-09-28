@@ -38,8 +38,7 @@ class AuthorDAOJdbcTest {
     @DisplayName("должен вставлять запись и извлекать ее из БД")
     @Test
     void createTest() {
-        Author authorToSave = new Author();
-        authorToSave.setName("testAuthor");
+        Author authorToSave = new Author("testAuthor");
         daoJdbc.create(authorToSave);
 
         Author authorFromDb = daoJdbc.findById(3);
