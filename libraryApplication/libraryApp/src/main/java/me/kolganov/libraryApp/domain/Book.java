@@ -18,15 +18,21 @@ public class Book {
         this.name = name;
     }
 
+    public Book(long id, Genre genre) {
+        this.id = id;
+        this.genre = genre;
+    }
+
+    public Book(long id, Author author) {
+        this.id = id;
+        this.author = author;
+    }
+
     public Book() {
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -37,16 +43,8 @@ public class Book {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
     public Genre getGenre() {
         return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
     @Override

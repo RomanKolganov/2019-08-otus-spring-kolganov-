@@ -38,19 +38,11 @@ public class BookShell {
 
     @ShellMethod(value = "Update book author", key = {"update-book-author", "uba"})
     public void updateBookAuthor(@ShellOption long bookId, long authorId) {
-        Book book = new Book();
-        book.setId(bookId);
-        book.setAuthor(new Author(authorId));
-
-        bookService.updateAuthor(book);
+        bookService.updateAuthor(new Book(bookId, new Author(authorId)));
     }
 
     @ShellMethod(value = "Update book genre", key = {"update-book-genre", "ubg"})
     public void updateBookGenre(@ShellOption long bookId, long genreId) {
-        Book book = new Book();
-        book.setId(bookId);
-        book.setGenre(new Genre(genreId));
-
-        bookService.updateGenre(book);
+        bookService.updateGenre(new Book(bookId, new Genre(genreId)));
     }
 }

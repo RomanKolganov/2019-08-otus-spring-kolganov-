@@ -5,6 +5,7 @@ import me.kolganov.libraryApp.domain.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -16,15 +17,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String getAll() {
-        List<Book> books = dao.findAll();
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Book b : books) {
-            stringBuilder.append(b.toString());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+        return dao.findAll().stream().map(Book::toString).collect(Collectors.joining("\n"));
     }
 
     @Override

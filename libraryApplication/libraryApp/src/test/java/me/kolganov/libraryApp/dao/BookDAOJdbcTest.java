@@ -27,4 +27,14 @@ class BookDAOJdbcTest {
         assertThat(books).isNotNull().hasSize(EXPECTED_NUMBER_OF_AUTHORS)
                 .allMatch(s -> !s.getName().equals(""));
     }
+
+    @DisplayName("должен возвращать 1 книгу по id")
+    @Test
+    void findByIdTest() {
+        Book book = daoJdbc.findById(1);
+        assertThat(book).isNotNull()
+                .matches(s -> s.getName().equals("Сказка о попе и о работнике его Балде"))
+                .matches(s -> s.getAuthor().getName().equals("Пушкин А.С."))
+                .matches(s -> s.getGenre().getName().equals("Сказка"));
+    }
 }

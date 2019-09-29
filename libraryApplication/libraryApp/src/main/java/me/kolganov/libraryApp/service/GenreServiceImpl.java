@@ -5,6 +5,7 @@ import me.kolganov.libraryApp.domain.Genre;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -16,15 +17,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public String getAll() {
-        List<Genre> genres = dao.findAll();
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Genre g : genres) {
-            stringBuilder.append(g.toString());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
+        return dao.findAll().stream().map(Genre::toString).collect(Collectors.joining("\n"));
     }
 
     @Override
@@ -34,10 +27,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void create(String name) {
-        Genre genre = new Genre();
-        genre.setName(name);
-
-        dao.create(genre);
+        dao.create(new Genre(name));
     }
 
     @Override
