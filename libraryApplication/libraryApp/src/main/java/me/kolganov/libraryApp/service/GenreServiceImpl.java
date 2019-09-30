@@ -26,13 +26,8 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void create(String name) {
-        dao.create(new Genre(name));
-    }
-
-    @Override
-    public void update(Genre genre) {
-        dao.update(genre);
+    public void save(Genre genre) {
+        dao.save(genre);
     }
 
     @Override

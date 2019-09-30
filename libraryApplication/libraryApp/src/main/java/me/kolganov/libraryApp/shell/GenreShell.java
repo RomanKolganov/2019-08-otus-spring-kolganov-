@@ -26,12 +26,12 @@ public class GenreShell {
 
     @ShellMethod(value = "Save new genre", key = {"save-new-genre", "sg"})
     public void saveNewGenre(@ShellOption String name) {
-        genreService.create(name);
+        genreService.save(new Genre(name));
     }
 
     @ShellMethod(value = "Update genre by id", key = {"update-genre", "ug"})
     public void updateGenre(@ShellOption long id, String name) {
-        genreService.update(new Genre(id, name));
+        genreService.save(new Genre(id, name));
     }
 
     @ShellMethod(value = "Delete genre by id", key = {"delete-genre", "dg"})
