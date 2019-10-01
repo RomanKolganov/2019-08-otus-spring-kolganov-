@@ -10,10 +10,10 @@ public class Book {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToOne(targetEntity = Author.class)
+    @OneToOne(targetEntity = Author.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Author author;
-    @OneToOne(targetEntity = Genre.class)
+    @OneToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
@@ -46,12 +46,24 @@ public class Book {
         return id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
 
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     public Author getAuthor() {
         return author;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public Genre getGenre() {
