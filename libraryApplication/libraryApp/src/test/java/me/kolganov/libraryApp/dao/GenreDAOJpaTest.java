@@ -1,6 +1,6 @@
 package me.kolganov.libraryApp.dao;
 
-import me.kolganov.libraryApp.domain.Author;
+import me.kolganov.libraryApp.domain.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +8,25 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DisplayName("Репозиторий на основе JPA для работы с авторами ")
+@DisplayName("Репозиторий на основе JPA для работы с жанрами ")
 @DataJpaTest
-@Import(AuthorDAOJpa.class)
-class AuthorDAOJpaTest {
+@Import({GenreDAOJpa.class})
+class GenreDAOJpaTest {
     @Autowired
-    private AuthorDAOJpa daoJpa;
+    private GenreDAOJpa genreDAOJpa;
     @Autowired
     private TestEntityManager em;
 
     @DisplayName("должен сохранять и получать сущность из БД")
     @Test
     void saveAndFindTest() {
-        Author author = new Author("authorName");
-        daoJpa.save(author);
+        Genre genre = new Genre("newGenre");
+        genreDAOJpa.save(genre);
 
-        Author actualAuthor = em.find(Author.class, author.getId());
+        Genre actualGenre = em.find(Genre.class, genre.getId());
 
-        assertThat(actualAuthor).isNotNull().matches(s -> s.getName().equals(author.getName()));
+        assertThat(actualGenre).isNotNull().matches(s -> s.getName().equals(genre.getName()));
     }
 }
