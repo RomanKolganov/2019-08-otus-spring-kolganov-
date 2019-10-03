@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface AuthorDAO {
     List<Author> findAll();
     Optional<Author> findById(long id);
-    Author save(Author author);
+    void save(Author author);
     void deleteById(long id);
 }

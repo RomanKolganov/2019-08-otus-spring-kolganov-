@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface GenreDAO {
     List<Genre> findAll();
     Optional<Genre> findById(long id);
-    Genre save(Genre genre);
+    void save(Genre genre);
     void deleteById(long id);
 }

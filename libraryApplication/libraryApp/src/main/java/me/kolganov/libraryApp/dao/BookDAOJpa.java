@@ -28,14 +28,13 @@ public class BookDAOJpa implements BookDAO {
 
     @Override
     @Transactional
-    public Book save(Book book) {
+    public void save(Book book) {
         if (book.getId() <= 0) {
             em.persist(book);
-            return book;
         } else {
             Book bookToSave = em.find(Book.class, book.getId());
             bookToSave.setName(book.getName());
-            return em.merge(bookToSave);
+            em.merge(bookToSave);
         }
     }
 

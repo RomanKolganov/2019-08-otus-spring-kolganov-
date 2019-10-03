@@ -26,12 +26,11 @@ public class GenreDAOJpa implements GenreDAO {
 
     @Override
     @Transactional
-    public Genre save(Genre genre) {
+    public void save(Genre genre) {
         if (genre.getId() <= 0) {
             em.persist(genre);
-            return genre;
         } else {
-            return em.merge(genre);
+            em.merge(genre);
         }
     }
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface BookDAO {
     List<Book> findAll();
     Optional<Book> findById(long id);
-    Book save(Book book);
+    void save(Book book);
     void updateAuthor(Book book);
     void updateGenre(Book book);
     void deleteById(long id);

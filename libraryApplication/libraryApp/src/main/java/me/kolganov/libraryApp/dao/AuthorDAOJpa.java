@@ -26,12 +26,11 @@ public class AuthorDAOJpa implements AuthorDAO {
 
     @Override
     @Transactional
-    public Author save(Author author) {
+    public void save(Author author) {
         if (author.getId() <= 0) {
             em.persist(author);
-            return author;
         } else {
-            return em.merge(author);
+            em.merge(author);
         }
     }
 
