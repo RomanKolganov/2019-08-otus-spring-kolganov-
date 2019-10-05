@@ -46,17 +46,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void save(Book book) {
-        bookDAO.save(book);
-    }
-
-    @Override
-    public void updateAuthor(Book book) {
-        bookDAO.updateAuthor(book);
-    }
-
-    @Override
-    public void updateGenre(Book book) {
-        bookDAO.updateGenre(book);
+        Optional<Book> bookFromDb = bookDAO.findById(book.getId());
+        bookFromDb.ifPresent(s -> s.setName(book.getName()));
+        bookFromDb.ifPresent(bookDAO::save);
     }
 
     @Override
