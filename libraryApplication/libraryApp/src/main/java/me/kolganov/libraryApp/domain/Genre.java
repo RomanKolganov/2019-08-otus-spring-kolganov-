@@ -1,11 +1,15 @@
 package me.kolganov.libraryApp.domain;
 
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "genres")
 public class Genre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "name", nullable = false)
     private String name;
-    private List<Book> books;
 
     public Genre(long id, String name) {
         this.id = id;
@@ -33,10 +37,6 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Book> getBooks() {
-        return books;
     }
 
     @Override

@@ -31,9 +31,14 @@ public class BookShell {
         bookService.delete(id);
     }
 
+    @ShellMethod(value = "Save new book", key = {"save-book", "sb"})
+    public void saveNewBook(@ShellOption String name, long authorId, long genreId) {
+        bookService.save(new Book(name), authorId, genreId);
+    }
+
     @ShellMethod(value = "Update book name", key = {"update-book-name", "ubn"})
     public void updateBookName(@ShellOption long id, String name) {
-        bookService.updateName(new Book(id, name));
+        bookService.save(new Book(id, name));
     }
 
     @ShellMethod(value = "Update book author", key = {"update-book-author", "uba"})

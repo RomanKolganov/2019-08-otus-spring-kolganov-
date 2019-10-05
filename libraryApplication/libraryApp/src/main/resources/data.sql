@@ -13,3 +13,5 @@ insert into books (`name`, author_id, genre_id) values ('Евгений Онег
 insert into books (`name`, author_id, genre_id) values ('Бородино', 2, 2);
 insert into books (`name`, author_id, genre_id) values ('Парус', 2, 2);
 insert into books (`name`, author_id, genre_id) values ('Герой нашего времени', 2, 3);
+
+insert into comments (text, book_id) values ('Концовка норм :)', 1)

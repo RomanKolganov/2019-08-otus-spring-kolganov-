@@ -26,12 +26,12 @@ public class AuthorShell {
 
     @ShellMethod(value = "Save new author", key = {"save-new-author", "sa"})
     public void saveNewAuthor(@ShellOption String name) {
-        service.create(name);
+        service.save(new Author(name));
     }
 
     @ShellMethod(value = "Update author by id", key = {"update-author", "ua"})
     public void updateAuthor(@ShellOption long id, String name) {
-        service.update(new Author(id, name));
+        service.save(new Author(id, name));
     }
 
     @ShellMethod(value = "Delete author by id", key = {"delete-author", "da"})

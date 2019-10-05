@@ -5,7 +5,6 @@ import me.kolganov.libraryApp.domain.Author;
 public interface AuthorService {
     String getAll();
     String getById(long id);
-    void create(String name);
-    void update(Author author);
+    void save(Author author);
     void delete(long id);
 }

@@ -3,11 +3,11 @@ package me.kolganov.libraryApp.dao;
 import me.kolganov.libraryApp.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GenreDAO {
     List<Genre> findAll();
-    Genre findById(long id);
-    void create(Genre genre);
-    void update(Genre genre);
+    Optional<Genre> findById(long id);
+    void save(Genre genre);
     void deleteById(long id);
 }
