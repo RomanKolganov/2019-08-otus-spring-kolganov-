@@ -1,8 +1,6 @@
 package me.kolganov.libraryApp.shell;
 
-import me.kolganov.libraryApp.domain.Author;
 import me.kolganov.libraryApp.domain.Book;
-import me.kolganov.libraryApp.domain.Genre;
 import me.kolganov.libraryApp.service.BookService;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -39,15 +37,5 @@ public class BookShell {
     @ShellMethod(value = "Update book name", key = {"update-book-name", "ubn"})
     public void updateBookName(@ShellOption long id, String name) {
         bookService.save(new Book(id, name));
-    }
-
-    @ShellMethod(value = "Update book author", key = {"update-book-author", "uba"})
-    public void updateBookAuthor(@ShellOption long bookId, long authorId) {
-        bookService.updateAuthor(new Book(bookId, new Author(authorId)));
-    }
-
-    @ShellMethod(value = "Update book genre", key = {"update-book-genre", "ubg"})
-    public void updateBookGenre(@ShellOption long bookId, long genreId) {
-        bookService.updateGenre(new Book(bookId, new Genre(genreId)));
     }
 }

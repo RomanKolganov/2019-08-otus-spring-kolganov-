@@ -3,19 +3,20 @@ package me.kolganov.libraryApp.dao;
 import me.kolganov.libraryApp.domain.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("Репозиторий на основе JPA для работы с жанрами ")
 @DataJpaTest
-@Import({GenreDAOJpa.class})
-class GenreDAOJpaTest {
+@RunWith(SpringRunner.class)
+class GenreDAOTest {
     @Autowired
-    private GenreDAOJpa genreDAOJpa;
+    private GenreDAO genreDAOJpa;
     @Autowired
     private TestEntityManager em;
 

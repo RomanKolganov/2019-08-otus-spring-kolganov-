@@ -1,13 +1,10 @@
 package me.kolganov.libraryApp.dao;
 
 import me.kolganov.libraryApp.domain.Genre;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface GenreDAO {
-    List<Genre> findAll();
+public interface GenreDAO extends JpaRepository<Genre, Long> {
     Optional<Genre> findById(long id);
-    void save(Genre genre);
-    void deleteById(long id);
 }
