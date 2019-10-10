@@ -1,23 +1,20 @@
 package me.kolganov.libraryApp.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "genres")
+@Document(collection = "genres")
 public class Genre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "name", nullable = false)
+    private String id;
+    @Field("name")
     private String name;
 
-    public Genre(long id, String name) {
+    public Genre(String id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Genre(long id) {
-        this.id = id;
     }
 
     public Genre(String name) {
@@ -27,7 +24,7 @@ public class Genre {
     public Genre(){
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

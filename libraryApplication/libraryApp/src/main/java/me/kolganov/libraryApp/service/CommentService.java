@@ -4,7 +4,7 @@ import me.kolganov.libraryApp.domain.Comment;
 
 public interface CommentService {
     String getAll();
-    String getById(long id);
-    void save(Comment comment, long bookId);
-    void delete(long id);
+    String getById(String id);
+    void save(Comment comment, String bookId);
+    void delete(String id);
 }

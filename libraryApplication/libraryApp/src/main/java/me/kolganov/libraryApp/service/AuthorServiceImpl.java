@@ -6,6 +6,7 @@ import me.kolganov.libraryApp.domain.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +23,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public String getById(long id) {
-        return dao.findById(id).toString();
+    public String getByName(String name) {
+        return dao.findByName(name).toString();
     }
 
     @Override
@@ -32,7 +33,18 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void delete(long id) {
-        dao.deleteById(id);
+    public void update(String oldName, String newName) {
+        Optional<Author> optionalAuthor = dao.findByName(oldName);
+
+        if (optionalAuthor.isPresent()) {
+            Author author = optionalAuthor.get();
+            author.setName(newName);
+            dao.save(author);
+        }
+    }
+
+    @Override
+    public void delete(String name) {
+        dao.deleteByName(name);
     }
 }

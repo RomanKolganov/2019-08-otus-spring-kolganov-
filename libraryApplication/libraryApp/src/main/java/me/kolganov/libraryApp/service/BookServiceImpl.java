@@ -29,14 +29,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String getById(long id) {
+    public String getById(String id) {
         return bookDAO.findById(id).toString();
     }
 
     @Override
-    public void save(Book book, long authorId, long genreId) {
-        Optional<Author> author = authorDAO.findById(authorId);
-        Optional<Genre> genre = genreDAO.findById(genreId);
+    public void save(Book book, String authorName, String genreName) {
+        Optional<Author> author = authorDAO.findByName(authorName);
+        Optional<Genre> genre = genreDAO.findByName(genreName);
 
         author.ifPresent(book::setAuthor);
         genre.ifPresent(book::setGenre);
@@ -52,7 +52,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(String id) {
         bookDAO.deleteById(id);
     }
 }

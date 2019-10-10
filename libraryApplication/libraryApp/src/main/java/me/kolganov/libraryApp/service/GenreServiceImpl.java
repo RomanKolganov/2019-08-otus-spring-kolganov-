@@ -21,8 +21,8 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public String getById(long id) {
-        return dao.findById(id).toString();
+    public String getByName(String name) {
+        return dao.findByName(name).toString();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void delete(long id) {
-        dao.deleteById(id);
+    public void delete(String name) {
+        dao.deleteByName(name);
     }
 }
