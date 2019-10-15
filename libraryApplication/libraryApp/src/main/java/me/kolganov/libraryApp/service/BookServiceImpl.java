@@ -34,9 +34,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void save(Book book, String authorName, String genreName) {
-        Optional<Author> author = authorDAO.findByName(authorName);
-        Optional<Genre> genre = genreDAO.findByName(genreName);
+    public void save(Book book, String authorId, String genreId) {
+        Optional<Author> author = authorDAO.findById(authorId);
+        Optional<Genre> genre = genreDAO.findById(genreId);
 
         author.ifPresent(book::setAuthor);
         genre.ifPresent(book::setGenre);
@@ -47,8 +47,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public void save(Book book) {
         Optional<Book> bookFromDb = bookDAO.findById(book.getId());
-        bookFromDb.ifPresent(s -> s.setName(book.getName()));
-        bookFromDb.ifPresent(bookDAO::save);
+        bookFromDb.ifPresent(b -> {
+            b.setName(book.getName());
+            bookDAO.save(b);
+        });
     }
 
     @Override

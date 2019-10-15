@@ -19,9 +19,9 @@ public class AuthorShell {
         return service.getAll();
     }
 
-    @ShellMethod(value = "Get author by name", key = {"get-author-by-name", "ga"})
-    public String getAuthorById(@ShellOption String name) {
-        return service.getByName(name);
+    @ShellMethod(value = "Get author by id", key = {"get-author-by-id", "ga"})
+    public String getAuthorById(@ShellOption String id) {
+        return service.getById(id);
     }
 
     @ShellMethod(value = "Save new author", key = {"save-new-author", "sa"})
@@ -29,9 +29,9 @@ public class AuthorShell {
         service.save(new Author(name));
     }
 
-    @ShellMethod(value = "Update author by name", key = {"update-author", "ua"})
-    public void updateAuthor(@ShellOption String oldName, String newName) {
-        service.update(oldName, newName);
+    @ShellMethod(value = "Update author by id", key = {"update-author", "ua"})
+    public void updateAuthor(@ShellOption String id, String newName) {
+        service.update(id, newName);
     }
 
     @ShellMethod(value = "Delete author by id", key = {"delete-author", "da"})

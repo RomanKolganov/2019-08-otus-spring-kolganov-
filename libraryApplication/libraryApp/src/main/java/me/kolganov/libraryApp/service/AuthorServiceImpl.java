@@ -2,10 +2,8 @@ package me.kolganov.libraryApp.service;
 
 import me.kolganov.libraryApp.dao.AuthorDAO;
 import me.kolganov.libraryApp.domain.Author;
-import me.kolganov.libraryApp.domain.Book;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,8 +21,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public String getByName(String name) {
-        return dao.findByName(name).toString();
+    public String getById(String id) {
+        return dao.findById(id).toString();
     }
 
     @Override
@@ -33,18 +31,16 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void update(String oldName, String newName) {
-        Optional<Author> optionalAuthor = dao.findByName(oldName);
-
-        if (optionalAuthor.isPresent()) {
-            Author author = optionalAuthor.get();
-            author.setName(newName);
-            dao.save(author);
-        }
+    public void update(String id, String newName) {
+        Optional<Author> optionalAuthor = dao.findById(id);
+        optionalAuthor.ifPresent(a -> {
+            a.setName(newName);
+            dao.save(a);
+        });
     }
 
     @Override
-    public void delete(String name) {
-        dao.deleteByName(name);
+    public void delete(String id) {
+        dao.deleteById(id);
     }
 }

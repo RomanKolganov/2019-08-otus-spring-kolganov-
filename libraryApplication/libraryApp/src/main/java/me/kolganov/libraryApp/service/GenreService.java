@@ -4,7 +4,7 @@ import me.kolganov.libraryApp.domain.Genre;
 
 public interface GenreService {
     String getAll();
-    String getByName(String name);
+    String getById(String id);
     void save(Genre genre);
-    void delete(String name);
+    void delete(String id);
 }

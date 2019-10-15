@@ -21,7 +21,7 @@ public class GenreShell {
 
     @ShellMethod(value = "Get genre by id", key = {"get-genre-by-id", "gg"})
     public String getGenreById(@ShellOption String id) {
-        return genreService.getByName(id);
+        return genreService.getById(id);
     }
 
     @ShellMethod(value = "Save new genre", key = {"save-new-genre", "sg"})
