@@ -1,6 +1,9 @@
 spring:
-  mongodb:
-    database: test
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: test
 
 #  datasource:
 #    url: jdbc:h2:mem:testdb

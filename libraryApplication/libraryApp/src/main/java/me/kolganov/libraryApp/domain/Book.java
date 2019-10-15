@@ -40,6 +40,12 @@ public class Book {
         this.author = author;
     }
 
+    public Book(String name, Author author, Genre genre) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+    }
+
     public Book() {
     }
 

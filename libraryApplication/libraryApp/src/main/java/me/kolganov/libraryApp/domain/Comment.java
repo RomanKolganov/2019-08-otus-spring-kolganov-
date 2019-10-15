@@ -21,6 +21,11 @@ public class Comment {
         this.text = text;
     }
 
+    public Comment(String text, Book book) {
+        this.text = text;
+        this.book = book;
+    }
+
     public Comment() {
     }
 
