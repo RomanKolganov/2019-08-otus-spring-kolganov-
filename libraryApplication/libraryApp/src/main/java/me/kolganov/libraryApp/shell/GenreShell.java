@@ -20,7 +20,7 @@ public class GenreShell {
     }
 
     @ShellMethod(value = "Get genre by id", key = {"get-genre-by-id", "gg"})
-    public String getGenreById(@ShellOption long id) {
+    public String getGenreById(@ShellOption String id) {
         return genreService.getById(id);
     }
 
@@ -30,12 +30,12 @@ public class GenreShell {
     }
 
     @ShellMethod(value = "Update genre by id", key = {"update-genre", "ug"})
-    public void updateGenre(@ShellOption long id, String name) {
+    public void updateGenre(@ShellOption String id, String name) {
         genreService.save(new Genre(id, name));
     }
 
     @ShellMethod(value = "Delete genre by id", key = {"delete-genre", "dg"})
-    public void deleteGenreById(@ShellOption long id) {
+    public void deleteGenreById(@ShellOption String id) {
         genreService.delete(id);
     }
 }

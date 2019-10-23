@@ -20,17 +20,17 @@ public class CommentShell {
     }
 
     @ShellMethod(value = "Get comment by id", key = {"get-comment", "gc"})
-    public String getCommentById(@ShellOption long id) {
+    public String getCommentById(@ShellOption String id) {
         return commentService.getById(id);
     }
 
     @ShellMethod(value = "Save new Comment to Book", key = {"save-comment", "sc"})
-    public void saveNewComment(@ShellOption String text, long bookId) {
+    public void saveNewComment(@ShellOption String text, String bookId) {
         commentService.save(new Comment(text), bookId);
     }
 
     @ShellMethod(value = "Delete comment by id", key = {"delete-comment", "dc"})
-    public void deleteCommentById(@ShellOption long id) {
+    public void deleteCommentById(@ShellOption String id) {
         commentService.delete(id);
     }
 }

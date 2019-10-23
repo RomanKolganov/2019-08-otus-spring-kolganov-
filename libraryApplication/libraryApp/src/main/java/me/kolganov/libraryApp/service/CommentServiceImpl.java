@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public String getById(long id) {
+    public String getById(String id) {
         Optional<Comment> comment = commentDAO.findById(id);
 
         if (comment.isPresent()) {
@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void save(Comment comment, long bookId) {
+    public void save(Comment comment, String bookId) {
         Optional<Book> book = bookDAO.findById(bookId);
         book.ifPresent(comment::setBook);
 
@@ -43,7 +43,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(String id) {
         commentDAO.deleteById(id);
     }
 }

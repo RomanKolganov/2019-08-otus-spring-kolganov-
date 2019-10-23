@@ -20,7 +20,7 @@ public class AuthorShell {
     }
 
     @ShellMethod(value = "Get author by id", key = {"get-author-by-id", "ga"})
-    public String getAuthorById(@ShellOption long id) {
+    public String getAuthorById(@ShellOption String id) {
         return service.getById(id);
     }
 
@@ -30,12 +30,12 @@ public class AuthorShell {
     }
 
     @ShellMethod(value = "Update author by id", key = {"update-author", "ua"})
-    public void updateAuthor(@ShellOption long id, String name) {
-        service.save(new Author(id, name));
+    public void updateAuthor(@ShellOption String id, String newName) {
+        service.update(id, newName);
     }
 
     @ShellMethod(value = "Delete author by id", key = {"delete-author", "da"})
-    public void deleteAuthorById(@ShellOption long id) {
+    public void deleteAuthorById(@ShellOption String id) {
         service.delete(id);
     }
 }

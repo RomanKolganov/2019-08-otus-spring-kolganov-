@@ -1,45 +1,55 @@
 package me.kolganov.libraryApp.domain;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "books")
+@Document(collection = "books")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "name", nullable = false)
+    private String id;
+    @Field("name")
     private String name;
-    @OneToOne(targetEntity = Author.class)
-    @JoinColumn(name = "author_id")
+
+    @DBRef
+    @Field("authors")
     private Author author;
-    @OneToOne(targetEntity = Genre.class)
-    @JoinColumn(name = "genre_id")
+
+    @DBRef
+    @Field("genres")
     private Genre genre;
 
     public Book(String name) {
         this.name = name;
     }
 
-    public Book(long id, String name) {
+    public Book(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Book(long id, Genre genre) {
+    public Book(String id, Genre genre) {
         this.id = id;
         this.genre = genre;
     }
 
-    public Book(long id, Author author) {
+    public Book(String id, Author author) {
         this.id = id;
         this.author = author;
+    }
+
+    public Book(String name, Author author, Genre genre) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
     }
 
     public Book() {
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

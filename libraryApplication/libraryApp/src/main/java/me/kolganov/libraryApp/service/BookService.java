@@ -4,8 +4,8 @@ import me.kolganov.libraryApp.domain.Book;
 
 public interface BookService {
     String getAll();
-    String getById(long id);
-    void save(Book book, long authorId, long genreId);
+    String getById(String id);
+    void save(Book book, String authorId, String genreId);
     void save(Book book);
-    void delete(long id);
+    void delete(String id);
 }
