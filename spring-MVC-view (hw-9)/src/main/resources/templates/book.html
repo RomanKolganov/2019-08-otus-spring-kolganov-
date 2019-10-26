@@ -2,27 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <script src="webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
     <title>Книги</title>
 </head>
 <body>
-    <h1>Книги</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>author</th>
-            <th>genre</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.id}">73</td>
-            <td th:text="${book.name}">Название книги</td>
-            <td th:text="${book.author.name}">Автор</td>
-            <td th:text="${book.genre.name}">Жанр</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="ui container">
+        <div th:insert="~{menu :: menu}"></div>
+        <h1 class="ui header">Книги</h1>
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>author</th>
+                <th>genre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}">73</td>
+                <td th:text="${book.name}">Название книги</td>
+                <td th:text="${book.author.name}">Автор</td>
+                <td th:text="${book.genre.name}">Жанр</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
