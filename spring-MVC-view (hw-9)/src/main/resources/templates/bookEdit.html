@@ -6,47 +6,18 @@
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
-    <title>Книги</title>
+    <title>Редактирование книги</title>
 </head>
 <body>
     <div class="ui container">
         <div th:insert="~{menu :: menu}"></div>
-        <h1 class="ui header">Книги</h1>
-        <table class="ui table">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>author</th>
-                <th>genre</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.id}">73</td>
-                <td th:text="${book.name}">Название книги</td>
-                <td th:text="${book.author.name}">Автор</td>
-                <td th:text="${book.genre.name}">Жанр</td>
-                <td>
-                    <form action="books/delete" method="post">
-                        <input th:value="${book.id}" type="hidden" name="id">
-                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
-                    </form>
-                </td>
-                <td>
-                    <a class="ui button" th:href="@{books/edit(id=${book.id})}" href="bookEdit.html">
-                        <i class="ui cogs icon"></i> Ред.
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <form class="ui form" action="books/create" method="post">
+        <h1 class="ui header">Редактирование книги</h1>
+        <h3 class="ui header" th:text="${book.name}">Название книги</h3>
+        <form class="ui form" action="/books/update" method="post">
+            <input th:value="${book.id}" type="hidden" name="id">
             <div class="field">
-                <label>Название книги</label>
-                <input type="text" name="name" placeholder="Введите название книги">
+                <label>Название автора</label>
+                <input th:value="${book.name}" type="text" name="name" placeholder="Введите название книги">
             </div>
             <div class="ui grid">
                 <div class="two column row">
@@ -79,7 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="column">
-                        <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
+                        <button class="ui button" type="submit"><i class="ui check icon"></i>Сохранить</button>
                     </div>
                 </div>
             </div>

@@ -29,8 +29,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String getById(long id) {
-        return bookDAO.findById(id).toString();
+    public Book getById(long id) {
+        return bookDAO.findById(id).orElseGet(Book::new);
     }
 
     @Override
@@ -45,10 +45,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void save(Book book) {
+    public void update(Book book, long authorId, long genreId) {
         Optional<Book> bookFromDb = bookDAO.findById(book.getId());
-        bookFromDb.ifPresent(s -> s.setName(book.getName()));
-        bookFromDb.ifPresent(bookDAO::save);
+        Optional<Author> author = authorDAO.findById(authorId);
+        Optional<Genre> genre = genreDAO.findById(genreId);
+
+        bookFromDb.ifPresent(s -> {
+            s.setName(book.getName());
+            s.setAuthor(author.orElseGet(Author::new));
+            s.setGenre(genre.orElseGet(Genre::new));
+            bookDAO.save(s);
+        });
     }
 
     @Override

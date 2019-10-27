@@ -1,6 +1,7 @@
 package me.kolganov.springmvcview.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "genres")
@@ -10,6 +11,9 @@ public class Genre {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    private List<Book> books;
 
     public Genre(long id, String name) {
         this.id = id;
@@ -31,12 +35,24 @@ public class Genre {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override

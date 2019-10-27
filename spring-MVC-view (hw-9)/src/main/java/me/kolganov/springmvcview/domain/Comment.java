@@ -10,7 +10,7 @@ public class Comment {
     private long id;
     @Column(name = "text")
     private String text;
-    @OneToOne(targetEntity = Book.class)
+    @ManyToOne (targetEntity = Book.class)
     @JoinColumn(name = "book_id")
     private Book book;
 
