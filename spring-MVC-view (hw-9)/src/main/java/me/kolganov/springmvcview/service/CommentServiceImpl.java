@@ -1,13 +1,13 @@
 package me.kolganov.springmvcview.service;
 
-import me.kolganov.springmvcview.domain.Comment;
 import me.kolganov.springmvcview.dao.BookDAO;
 import me.kolganov.springmvcview.dao.CommentDAO;
 import me.kolganov.springmvcview.domain.Book;
+import me.kolganov.springmvcview.domain.Comment;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -20,18 +20,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public String getAll() {
-        return commentDAO.findAll().stream().map(Comment::toString).collect(Collectors.joining("\n"));
+    public List<Comment> getAllByBookId(long bookId) {
+        return commentDAO.findAllByBookId(bookId);
     }
 
     @Override
-    public String getById(long id) {
-        Optional<Comment> comment = commentDAO.findById(id);
-
-        if (comment.isPresent()) {
-            return comment.get().toString();
-        }
-        return "Comment id=" + id + " is empty";
+    public Comment getById(long id) {
+        return commentDAO.findById(id).orElseGet(Comment::new);
     }
 
     @Override
@@ -40,6 +35,18 @@ public class CommentServiceImpl implements CommentService {
         book.ifPresent(comment::setBook);
 
         commentDAO.save(comment);
+    }
+
+    @Override
+    public void update(Comment comment, long bookId) {
+        Optional<Comment> oldComment = commentDAO.findById(comment.getId());
+        Optional<Book> book = bookDAO.findById(bookId);
+
+        oldComment.ifPresent(c -> {
+            c.setText(comment.getText());
+            c.setBook(book.orElseGet(Book::new));
+            commentDAO.save(c);
+        });
     }
 
     @Override

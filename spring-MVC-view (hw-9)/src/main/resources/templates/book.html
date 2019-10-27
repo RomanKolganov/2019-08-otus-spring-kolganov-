@@ -19,8 +19,8 @@
                 <th>name</th>
                 <th>author</th>
                 <th>genre</th>
-                <th></th>
-                <th></th>
+                <th>comments</th>
+                <th>actions</th>
             </tr>
             </thead>
             <tbody>
@@ -30,14 +30,16 @@
                 <td th:text="${book.author.name}">Автор</td>
                 <td th:text="${book.genre.name}">Жанр</td>
                 <td>
-                    <form action="books/delete" method="post">
-                        <input th:value="${book.id}" type="hidden" name="id">
-                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
-                    </form>
+                    <a class="ui button" th:href="@{comments(book_id=${book.id})}" href="comments.html">
+                        <i class="comments icon"></i>Комментарии
+                    </a>
                 </td>
                 <td>
+                    <a class="ui button" th:href="@{books/delete(id=${book.id})}" href="book.html">
+                        <i class="ui close icon"></i>Удалить
+                    </a>
                     <a class="ui button" th:href="@{books/edit(id=${book.id})}" href="bookEdit.html">
-                        <i class="ui cogs icon"></i> Ред.
+                        <i class="ui cogs icon"></i>Ред.
                     </a>
                 </td>
             </tr>

@@ -10,9 +10,15 @@ public class Comment {
     private long id;
     @Column(name = "text")
     private String text;
+
     @ManyToOne (targetEntity = Book.class)
     @JoinColumn(name = "book_id")
     private Book book;
+
+    public Comment(long id, String text) {
+        this.id = id;
+        this.text = text;
+    }
 
     public Comment(String text) {
         this.text = text;

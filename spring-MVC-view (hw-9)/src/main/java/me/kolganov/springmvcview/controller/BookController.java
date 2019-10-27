@@ -39,7 +39,7 @@ public class BookController {
         return "book";
     }
 
-    @RequestMapping(value = "/books/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/books/delete", method = RequestMethod.GET)
     public String delete(@RequestParam("id") long id) {
         bookService.delete(id);
         return "redirect:/books";
