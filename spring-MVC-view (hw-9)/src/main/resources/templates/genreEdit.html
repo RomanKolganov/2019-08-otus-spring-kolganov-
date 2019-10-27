@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <title>Редактирование жанра</title>
 </head>
 <body>
+    <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
-        <div th:insert="~{menu :: menu}"></div>
         <h1 class="ui header">Редактирование жанра</h1>
         <h3 class="ui header" th:text="${genre.name}">Название жанра</h3>
         <form class="ui form" action="/genres/update" method="post">

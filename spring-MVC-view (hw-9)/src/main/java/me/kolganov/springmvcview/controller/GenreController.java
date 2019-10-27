@@ -25,7 +25,7 @@ public class GenreController {
         return "genre";
     }
 
-    @RequestMapping(value = "/genres/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/genres/delete", method = RequestMethod.GET)
     public String delete(@RequestParam("id") long id) {
         genreService.delete(id);
         return "redirect:/genres";

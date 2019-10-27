@@ -6,21 +6,22 @@
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <title>Книги</title>
 </head>
 <body>
+    <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
-        <div th:insert="~{menu :: menu}"></div>
         <h1 class="ui header">Книги</h1>
         <table class="ui table">
             <thead>
             <tr>
                 <th>id</th>
-                <th>name</th>
-                <th>author</th>
-                <th>genre</th>
-                <th>comments</th>
-                <th>actions</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Жанр</th>
+                <th>Комментарии</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
             </tr>
             </tbody>
         </table>
+        <h3 class="ui dividing header">Добавить книгу</h3>
         <form class="ui form" action="books/create" method="post">
             <div class="field">
                 <label>Название книги</label>

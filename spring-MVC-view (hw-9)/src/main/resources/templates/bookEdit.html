@@ -6,11 +6,12 @@
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <title>Редактирование книги</title>
 </head>
 <body>
+    <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
-        <div th:insert="~{menu :: menu}"></div>
         <h1 class="ui header">Редактирование книги</h1>
         <h3 class="ui header" th:text="${book.name}">Название книги</h3>
         <form class="ui form" action="/books/update" method="post">

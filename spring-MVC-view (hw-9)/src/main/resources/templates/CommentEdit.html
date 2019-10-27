@@ -6,11 +6,12 @@
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <title>Редактирование коментария</title>
 </head>
 <body>
+    <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
-        <div th:insert="~{menu :: menu}"></div>
         <h1 class="ui header">Редактирование коментария</h1>
         <form class="ui form" action="/comments/update" method="post">
             <input th:value="${comment.id}" type="hidden" name="id">
