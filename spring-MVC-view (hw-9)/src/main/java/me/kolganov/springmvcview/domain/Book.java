@@ -10,10 +10,11 @@ public class Book {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToOne(targetEntity = Author.class)
+
+    @OneToOne(targetEntity = Author.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
-    @OneToOne(targetEntity = Genre.class)
+    @OneToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 

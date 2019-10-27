@@ -2,23 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <script src="webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
     <title>Жанры</title>
 </head>
 <body>
-    <h1>Авторы</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="genre : ${genres}">
-            <td th:text="${genre.id}">73</td>
-            <td th:text="${genre.name}">Название жанра</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="ui container">
+        <div th:insert="~{menu :: menu}"></div>
+        <h1 class="ui header">Жанры</h1>
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="genre : ${genres}">
+                <td th:text="${genre.id}">73</td>
+                <td th:text="${genre.name}">Название жанра</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

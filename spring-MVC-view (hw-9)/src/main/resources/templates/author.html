@@ -2,23 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <title>Авторы</title>
 </head>
 <body>
-    <h1>Авторы</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="author : ${authors}">
-            <td th:text="${author.id}">73</td>
-            <td th:text="${author.name}">Имя автора</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="ui container">
+        <div th:insert="~{menu :: menu}"></div>
+        <h1 class="ui header">Авторы</h1>
+        <table class="ui table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.id}">73</td>
+                <td th:text="${author.name}">Имя автора</td>
+                <td>
+                    <form action="authors/delete" method="post">
+                        <input th:value="${author.id}" type="hidden" name="id">
+                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
+                    </form>
+                </td>
+                <td>
+                    <a class="ui button" th:href="@{authors/edit(id=${author.id})}" href="authorEdit.html">
+                        <i class="ui cogs icon"></i> Ред.
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form class="ui form" action="authors/create" method="post">
+            <div class="field">
+                <label>Имя автора</label>
+                <input type="text" name="name" placeholder="Введите имя автора">
+            </div>
+            <button class="ui button" type="submit"><i class="check icon"></i>Сохранить</button>
+        </form>
+    </div>
 </body>
 </html>

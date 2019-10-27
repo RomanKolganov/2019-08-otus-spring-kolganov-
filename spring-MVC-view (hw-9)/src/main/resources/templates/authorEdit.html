@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <title>Редактирование автора</title>
+</head>
+    <body>
+        <div class="ui container">
+            <div th:insert="~{menu :: menu}"></div>
+            <h1 class="ui header">Редактирование автора</h1>
+            <h3 class="ui header" th:text="${author.name}">Имя автора</h3>
+            <form class="ui form" action="/authors/update" method="post">
+                <div class="field">
+                    <label>Имя автора</label>
+                    <input th:value="${author.name}" type="text" name="name" placeholder="Введите имя автора">
+                </div>
+                <input th:value="${author.id}" type="hidden" name="id">
+                <button class="ui button" type="submit"><i class="ui check icon"></i>Сохранить</button>
+            </form>
+        </div>
+    </body>
+</html>
