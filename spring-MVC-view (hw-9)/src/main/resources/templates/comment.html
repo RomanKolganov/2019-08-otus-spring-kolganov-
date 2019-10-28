@@ -26,12 +26,14 @@
                 <td th:text="${comment.id}">73</td>
                 <td th:text="${comment.text}">Текст комментария</td>
                 <td>
-                    <a class="ui button" th:href="@{comments/delete(book_id=${bookId}, id=${comment.id})}" href="comment.html">
-                        <i class="ui close icon"></i>Удалить
-                    </a>
-                    <a class="ui button" th:href="@{comments/edit(id=${comment.id})}" href="commentEdit.html">
-                        <i class="ui cogs icon"></i>Ред.
-                    </a>
+                    <form action="comments/delete" method="post">
+                        <input th:value="${comment.id}" type="hidden" name="id">
+                        <input th:value="${bookId}" type="hidden" name="book_id">
+                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
+                        <a class="ui button" th:href="@{comments/edit(id=${comment.id})}" href="commentEdit.html">
+                            <i class="ui cogs icon"></i>Ред.
+                        </a>
+                    </form>
                 </td>
             </tr>
             </tbody>
@@ -40,7 +42,7 @@
             <input th:value="${bookId}" type="hidden" name="book_id">
             <div class="field">
                 <label>Новый комментарий</label>
-                <input type="text" name="text" placeholder="Введите текст комментария">
+                <input class="txtInput" type="text" name="text" placeholder="Введите текст комментария">
             </div>
             <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
         </form>

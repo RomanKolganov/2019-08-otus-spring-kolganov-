@@ -17,11 +17,11 @@
             <input th:value="${comment.id}" type="hidden" name="id">
             <div class="field">
                 <label>Текст комментария</label>
-                <input th:value="${comment.text}" type="text" name="text" placeholder="Напишите комментарий">
+                <input th:value="${comment.text}" class="txtInput" type="text" name="text" placeholder="Напишите комментарий">
             </div>
             <div class="field">
                 <label>Книги</label>
-                <select class="ui fluid search dropdown" name="book_id">
+                <select class="ui fluid search dropdown bookDropdown" name="book_id">
                     <option value="">Выберите книгу</option>
                     <option th:each="book : ${books}"
                             th:value="${book.id}"
@@ -30,7 +30,7 @@
                     </option>
                 </select>
             </div>
-            <button class="ui button" type="submit"><i class="ui check icon"></i>Сохранить</button>
+            <button class="ui submit button" type="submit"><i class="ui check icon"></i>Сохранить</button>
         </form>
     </div>
 </body>

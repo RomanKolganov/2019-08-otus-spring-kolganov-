@@ -17,7 +17,7 @@
         <form class="ui form" action="/genres/update" method="post">
             <div class="field">
                 <label>Название жанра</label>
-                <input th:value="${genre.name}" type="text" name="name" placeholder="Введите название жанра">
+                <input th:value="${genre.name}" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
             </div>
             <input th:value="${genre.id}" type="hidden" name="id">
             <button class="ui button" type="submit"><i class="ui check icon"></i>Сохранить</button>

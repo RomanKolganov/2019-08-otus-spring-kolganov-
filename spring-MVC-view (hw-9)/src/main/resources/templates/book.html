@@ -36,12 +36,13 @@
                     </a>
                 </td>
                 <td>
-                    <a class="ui button" th:href="@{books/delete(id=${book.id})}" href="book.html">
-                        <i class="ui close icon"></i>Удалить
-                    </a>
-                    <a class="ui button" th:href="@{books/edit(id=${book.id})}" href="bookEdit.html">
-                        <i class="ui cogs icon"></i>Ред.
-                    </a>
+                    <form action="books/delete" method="post">
+                        <input th:value="${book.id}" type="hidden" name="id">
+                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
+                        <a class="ui button" th:href="@{books/edit(id=${book.id})}" href="bookEdit.html">
+                            <i class="ui cogs icon"></i>Ред.
+                        </a>
+                    </form>
                 </td>
             </tr>
             </tbody>
@@ -50,14 +51,14 @@
         <form class="ui form" action="books/create" method="post">
             <div class="field">
                 <label>Название книги</label>
-                <input type="text" name="name" placeholder="Введите название книги">
+                <input class="nameInput" type="text" name="name" placeholder="Введите название книги">
             </div>
             <div class="ui grid">
                 <div class="two column row">
                     <div class="column">
                         <div class="field">
                             <label>Авторы</label>
-                            <select class="ui fluid search dropdown" name="author_id">
+                            <select class="ui fluid search dropdown authorDropdown" name="author_id">
                                 <option value="">Выберите автора</option>
                                 <option th:each="author : ${authors}"
                                         th:value="${author.id}"
@@ -70,7 +71,7 @@
                     <div class="column">
                         <div class="field">
                             <label>Жанры</label>
-                            <select class="ui fluid search dropdown" name="genre_id">
+                            <select class="ui fluid search dropdown genreDropdown" name="genre_id">
                                 <option value="">Выберите жанр</option>
                                 <option th:each="genre : ${genres}"
                                         th:value="${genre.id}"
@@ -83,7 +84,7 @@
                 </div>
                 <div class="row">
                     <div class="column">
-                        <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
+                        <button class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
                     </div>
                 </div>
             </div>

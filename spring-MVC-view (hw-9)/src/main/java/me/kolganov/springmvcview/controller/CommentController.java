@@ -6,9 +6,7 @@ import me.kolganov.springmvcview.service.BookService;
 import me.kolganov.springmvcview.service.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class CommentController {
         this.bookService = bookService;
     }
 
-    @RequestMapping(value = "/comments", method = RequestMethod.GET)
+    @GetMapping(value = "/comments")
     public String getAll(@RequestParam("book_id") long bookId, Model model) {
         List<Comment> comments = commentService.getAllByBookId(bookId);
         model.addAttribute("bookId", bookId);
@@ -30,21 +28,21 @@ public class CommentController {
         return "comment";
     }
 
-    @RequestMapping(value = "/comments/delete", method = RequestMethod.GET)
+    @PostMapping(value = "/comments/delete")
     public String delete(@RequestParam("book_id") long bookId,
                          @RequestParam("id") long id) {
         commentService.delete(id);
         return "redirect:/comments?book_id="+bookId;
     }
 
-    @RequestMapping(value = "/comments/create", method = RequestMethod.POST)
+    @PostMapping(value = "/comments/create")
     public String create(@RequestParam("text") String text,
                          @RequestParam("book_id") long bookId) {
         commentService.save(new Comment(text), bookId);
         return "redirect:/comments?book_id="+bookId;
     }
 
-    @RequestMapping(value = "/comments/edit", method = RequestMethod.GET)
+    @GetMapping(value = "/comments/edit")
     public String getOne(@RequestParam("id") long id, Model model) {
         Comment comment = commentService.getById(id);
         List<Book> books = bookService.getAll();
@@ -54,7 +52,7 @@ public class CommentController {
         return "commentEdit";
     }
 
-    @RequestMapping(value = "/comments/update", method = RequestMethod.POST)
+    @PostMapping(value = "/comments/update")
     public String update(@RequestParam("id") long id,
                          @RequestParam("text") String text,
                          @RequestParam("book_id") long bookId) {

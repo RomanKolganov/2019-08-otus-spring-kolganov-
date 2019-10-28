@@ -26,12 +26,13 @@
                 <td th:text="${genre.id}">73</td>
                 <td th:text="${genre.name}">Название жанра</td>
                 <td>
-                    <a class="ui button" th:href="@{genres/delete(id=${genre.id})}" href="genre.html">
-                        <i class="ui close icon"></i>Удалить
-                    </a>
-                    <a class="ui button" th:href="@{genres/edit(id=${genre.id})}" href="genreEdit.html">
-                        <i class="ui cogs icon"></i> Ред.
-                    </a>
+                    <form action="genres/delete" method="post">
+                        <input th:value="${genre.id}" type="hidden" name="id">
+                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
+                        <a class="ui button" th:href="@{genres/edit(id=${genre.id})}" href="genreEdit.html">
+                            <i class="ui cogs icon"></i> Ред.
+                        </a>
+                    </form>
                 </td>
             </tr>
             </tbody>
@@ -39,9 +40,9 @@
         <form class="ui form" action="genres/create" method="post">
             <div class="field">
                 <label>Название жанра</label>
-                <input type="text" name="name" placeholder="Введите название жанра">
+                <input class="nameInput" type="text" name="name" placeholder="Введите название жанра">
             </div>
-            <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
+            <button class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
         </form>
     </div>
 </body>

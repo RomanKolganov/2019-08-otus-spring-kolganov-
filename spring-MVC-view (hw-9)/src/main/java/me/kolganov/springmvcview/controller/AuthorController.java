@@ -4,9 +4,7 @@ import me.kolganov.springmvcview.domain.Author;
 import me.kolganov.springmvcview.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,33 +16,33 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @RequestMapping(value = "/authors", method = RequestMethod.GET)
+    @GetMapping(value = "/authors")
     public String getAll(Model model) {
         List<Author> authors = authorService.getAll();
         model.addAttribute("authors", authors);
         return "author";
     }
 
-    @RequestMapping(value = "/authors/delete", method = RequestMethod.GET)
+    @PostMapping(value = "/authors/delete")
     public String delete(@RequestParam("id") long id) {
         authorService.delete(id);
         return "redirect:/authors";
     }
 
-    @RequestMapping(value = "/authors/create", method = RequestMethod.POST)
+    @PostMapping(value = "/authors/create")
     public String create(@RequestParam("name") String name) {
         authorService.save(new Author(name));
         return "redirect:/authors";
     }
 
-    @RequestMapping(value = "/authors/edit", method = RequestMethod.GET)
+    @GetMapping(value = "/authors/edit")
     public String getOne(@RequestParam("id") long id, Model model) {
         Author author = authorService.getById(id);
         model.addAttribute("author", author);
         return "authorEdit";
     }
 
-    @RequestMapping(value = "/authors/update", method = RequestMethod.POST)
+    @PostMapping(value = "/authors/update")
     public String update(@RequestParam("id") long id, @RequestParam("name") String name) {
         authorService.update(new Author(id, name));
         return "redirect:/authors";

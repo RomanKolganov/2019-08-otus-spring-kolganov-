@@ -8,9 +8,7 @@ import me.kolganov.springmvcview.service.BookService;
 import me.kolganov.springmvcview.service.GenreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class BookController {
         this.genreService = genreService;
     }
 
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    @GetMapping(value = "/books")
     public String getAll(Model model) {
         List<Book> books = bookService.getAll();
         List<Author> authors = authorService.getAll();
@@ -39,13 +37,13 @@ public class BookController {
         return "book";
     }
 
-    @RequestMapping(value = "/books/delete", method = RequestMethod.GET)
+    @PostMapping(value = "/books/delete")
     public String delete(@RequestParam("id") long id) {
         bookService.delete(id);
         return "redirect:/books";
     }
 
-    @RequestMapping(value = "/books/create", method = RequestMethod.POST)
+    @PostMapping(value = "/books/create")
     public String create(@RequestParam("name") String name,
                          @RequestParam("author_id") long authorId,
                          @RequestParam("genre_id") long genreId) {
@@ -53,7 +51,7 @@ public class BookController {
         return "redirect:/books";
     }
 
-    @RequestMapping(value = "/books/edit", method = RequestMethod.GET)
+    @GetMapping(value = "/books/edit")
     public String getOne(@RequestParam("id") long id, Model model) {
         Book book = bookService.getById(id);
         List<Author> authors = authorService.getAll();
@@ -65,7 +63,7 @@ public class BookController {
         return "bookEdit";
     }
 
-    @RequestMapping(value = "/books/update", method = RequestMethod.POST)
+    @PostMapping(value = "/books/update")
     public String update(@RequestParam("id") long id,
                          @RequestParam("name") String name,
                          @RequestParam("author_id") long authorId,

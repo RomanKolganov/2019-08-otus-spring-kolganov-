@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/js/main.js"></script>
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <title>Авторы</title>
@@ -25,12 +26,13 @@
                 <td th:text="${author.id}">73</td>
                 <td th:text="${author.name}">Имя автора</td>
                 <td>
-                    <a class="ui button" th:href="@{authors/delete(id=${author.id})}" href="author.html">
-                        <i class="ui close icon"></i>Удалить
-                    </a>
-                    <a class="ui button" th:href="@{authors/edit(id=${author.id})}" href="authorEdit.html">
-                        <i class="ui cogs icon"></i> Ред.
-                    </a>
+                    <form action="authors/delete" method="post">
+                        <input th:value="${author.id}" type="hidden" name="id">
+                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
+                        <a class="ui button" th:href="@{authors/edit(id=${author.id})}" href="authorEdit.html">
+                            <i class="ui cogs icon"></i> Ред.
+                        </a>
+                    </form>
                 </td>
             </tr>
             </tbody>
@@ -38,9 +40,9 @@
         <form class="ui form" action="authors/create" method="post">
             <div class="field">
                 <label>Имя автора</label>
-                <input type="text" name="name" placeholder="Введите имя автора">
+                <input class="nameInput" type="text" name="name" placeholder="Введите имя автора">
             </div>
-            <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
+            <button class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
         </form>
     </div>
 </body>
