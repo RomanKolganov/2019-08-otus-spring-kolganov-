@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/js/main.js"></script>
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <title>Редактирование книги</title>
+</head>
+<body>
+    <div th:insert="~{menu :: menu}"></div>
+    <div class="ui container">
+        <h1 class="ui header">Редактирование книги</h1>
+        <h3 class="ui header" th:text="${book.name}">Название книги</h3>
+        <form class="ui form" action="/books/update" method="post">
+            <input th:value="${book.id}" type="hidden" name="id">
+            <div class="field">
+                <label>Название автора</label>
+                <input th:value="${book.name}" class="nameInput" type="text" name="name" placeholder="Введите название книги">
+            </div>
+            <div class="ui grid">
+                <div class="two column row">
+                    <div class="column">
+                        <div class="field">
+                            <label>Авторы</label>
+                            <select class="ui fluid search dropdown" name="author_id">
+                                <option value="">Выберите автора</option>
+                                <option th:each="author : ${authors}"
+                                        th:value="${author.id}"
+                                        th:text="${author.name}"
+                                        th:selected="${author.id==book.author.id}">
+                                    Имя автора
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label>Жанры</label>
+                            <select class="ui fluid search dropdown" name="genre_id">
+                                <option value="">Выберите жанр</option>
+                                <option th:each="genre : ${genres}"
+                                        th:value="${genre.id}"
+                                        th:text="${genre.name}"
+                                        th:selected="${genre.id==book.genre.id}">
+                                    Название жанра
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <button class="ui button" type="submit"><i class="ui check icon"></i>Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
