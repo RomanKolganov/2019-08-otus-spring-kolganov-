@@ -29,7 +29,8 @@
                                 <option value="">Выберите автора</option>
                                 <option th:each="author : ${authors}"
                                         th:value="${author.id}"
-                                        th:text="${author.name}">
+                                        th:text="${author.name}"
+                                        th:selected="${author.id==book.author.id}">
                                     Имя автора
                                 </option>
                             </select>
@@ -42,7 +43,8 @@
                                 <option value="">Выберите жанр</option>
                                 <option th:each="genre : ${genres}"
                                         th:value="${genre.id}"
-                                        th:text="${genre.name}">
+                                        th:text="${genre.name}"
+                                        th:selected="${genre.id==book.genre.id}">
                                     Название жанра
                                 </option>
                             </select>
