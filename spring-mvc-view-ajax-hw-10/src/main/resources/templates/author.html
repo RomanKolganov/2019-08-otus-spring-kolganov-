@@ -52,13 +52,13 @@
 <!--            </tr>-->
 <!--            </tbody>-->
 <!--        </table>-->
-        <form class="ui form" action="authors/create" method="post">
+        <div class="ui form">
             <div class="field">
                 <label>Имя автора</label>
-                <input class="nameInput" type="text" name="name" placeholder="Введите имя автора">
+                <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите имя автора">
             </div>
-            <button class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
-        </form>
+            <button id="btnAdd" class="ui submit button"><i class="ui plus icon"></i>Добавить</button>
+        </div>
     </div>
 <script>
     $(document).ready(function () {
@@ -80,7 +80,10 @@
             ]
         });
 
-
+        $("#btnAdd").on("click", function () {
+            var data = {"name": $("#nameInput").val()};
+            createEntity("authors/create", data, $("#authorsTable"));
+        })
      });
 </script>
 </body>

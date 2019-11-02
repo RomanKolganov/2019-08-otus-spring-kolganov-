@@ -41,11 +41,11 @@ function deleteEntity(url, id, table) {
     });
 }
 
-function createEntity(url, name, table) {
+function createEntity(url, data, table) {
     $.ajax({
         url: url,
         type: 'POST',
-        data: {"name": name},
+        data: data,
         success: function () {
             table.DataTable().ajax.reload();
         }
