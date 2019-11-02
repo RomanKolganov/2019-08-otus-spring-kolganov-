@@ -51,3 +51,15 @@ function createEntity(url, data, table) {
         }
     });
 }
+
+function updateEntity(url, data, table) {
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function () {
+            table.DataTable().ajax.reload();
+        }
+    });
+}

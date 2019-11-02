@@ -27,10 +27,4 @@ public class AuthorPageController {
         model.addAttribute("author", author);
         return "authorEdit";
     }
-
-    @PostMapping(value = "/authors/update")
-    public String update(@RequestParam("id") long id, @RequestParam("name") String name) {
-        authorService.update(new Author(id, name));
-        return "redirect:/authors";
-    }
 }

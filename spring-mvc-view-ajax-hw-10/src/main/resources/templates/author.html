@@ -25,33 +25,6 @@
             </tr>
             </thead>
         </table>
-
-
-
-<!--        <table class="ui table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>id</th>-->
-<!--                <th>Имя автора</th>-->
-<!--                <th>Действия</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr th:each="author : ${authors}">-->
-<!--                <td th:text="${author.id}">73</td>-->
-<!--                <td th:text="${author.name}">Имя автора</td>-->
-<!--                <td>-->
-<!--                    <form action="authors/delete" method="post">-->
-<!--                        <input th:value="${author.id}" type="hidden" name="id">-->
-<!--                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>-->
-<!--                        <a class="ui button" th:href="@{authors/edit(id=${author.id})}" href="authorEdit.html">-->
-<!--                            <i class="ui cogs icon"></i> Ред.-->
-<!--                        </a>-->
-<!--                    </form>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
         <div class="ui form">
             <div class="field">
                 <label>Имя автора</label>
@@ -59,6 +32,7 @@
             </div>
             <button id="btnAdd" class="ui submit button"><i class="ui plus icon"></i>Добавить</button>
         </div>
+        <button id="btnSave" class="ui submit button"><i class="ui plus icon"></i>Обновить</button>
     </div>
 <script>
     $(document).ready(function () {
@@ -74,15 +48,35 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return '<button class="ui button" onclick=deleteEntity("authors/delete",'+row["id"]+',$("#authorsTable"));><i class="ui close icon"></i>Удалить</button>';
+                        return  '<button class="ui button" onclick=deleteEntity("authors/delete",'+row["id"]+',$("#authorsTable"));>' +
+                                    '<i class="ui close icon"></i>Удалить' +
+                                '</button>' +
+                                '<button id="btnUpdate" class="ui button">' +
+                                    '<i class="ui cogs icon"></i> Ред.' +
+                                '</button>';
                     }
                 }
             ]
         });
 
         $("#btnAdd").on("click", function () {
-            var data = {"name": $("#nameInput").val()};
-            createEntity("authors/create", data, $("#authorsTable"));
+            var nameValue = $("#nameInput").val();
+            if (nameValue !== "") {
+                var data = {"name": nameValue};
+                createEntity("authors/create", data, $("#authorsTable"));
+            }
+        });
+
+        $("#btnUpdate").on("click", function () {
+            //todo: всплывающее окно с формой отправки
+        });
+
+        $("#btnSave").on("click", function () {
+            var data = {
+                "id": 1,
+                "name": "ff"
+            };
+            updateEntity("authors/update", data, $("#authorsTable"))
         })
      });
 </script>

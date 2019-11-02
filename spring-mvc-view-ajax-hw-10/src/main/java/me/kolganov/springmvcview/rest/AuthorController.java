@@ -27,8 +27,13 @@ public class AuthorController {
         authorService.delete(id);
     }
 
-    @PostMapping(value = "/authors/create")
+    @PostMapping("/authors/create")
     public void createAuthor(@RequestParam("name") String name) {
         authorService.save(new Author(name));
+    }
+
+    @PutMapping(value = "/authors/update")
+    public void update(@RequestBody AuthorDto authorDto) {
+        authorService.update(AuthorDto.toEntity(authorDto));
     }
 }
