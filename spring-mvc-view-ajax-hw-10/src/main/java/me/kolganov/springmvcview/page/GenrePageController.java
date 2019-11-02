@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.domain.Genre;
 import me.kolganov.springmvcview.service.GenreService;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class GenreController {
+public class GenrePageController {
     private final GenreService genreService;
 
-    public GenreController(GenreService genreService) {
+    public GenrePageController(GenreService genreService) {
         this.genreService = genreService;
     }
 

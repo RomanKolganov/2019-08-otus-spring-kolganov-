@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.domain.Book;
 import me.kolganov.springmvcview.domain.Comment;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class CommentController {
+public class CommentPageController {
     private final CommentService commentService;
     private final BookService bookService;
 
-    public CommentController(CommentService commentService, BookService bookService) {
+    public CommentPageController(CommentService commentService, BookService bookService) {
         this.commentService = commentService;
         this.bookService = bookService;
     }

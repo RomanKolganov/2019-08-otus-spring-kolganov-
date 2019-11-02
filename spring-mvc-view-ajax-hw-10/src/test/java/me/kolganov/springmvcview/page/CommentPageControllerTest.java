@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.service.BookService;
 import me.kolganov.springmvcview.service.CommentService;
@@ -14,8 +14,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("Контроллер для работы с комментариями ")
-@WebMvcTest(CommentController.class)
-class CommentControllerTest {
+@WebMvcTest(CommentPageController.class)
+class CommentPageControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean

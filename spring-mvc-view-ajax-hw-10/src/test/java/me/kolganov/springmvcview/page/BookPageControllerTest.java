@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.service.AuthorService;
 import me.kolganov.springmvcview.service.BookService;
@@ -15,8 +15,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("Контроллер для работы с книгами ")
-@WebMvcTest(BookController.class)
-class BookControllerTest {
+@WebMvcTest(BookPageController.class)
+class BookPageControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean

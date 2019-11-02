@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.service.AuthorService;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +13,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("Контроллер для работы с авторами ")
-@WebMvcTest(AuthorController.class)
-class AuthorControllerTest {
+@WebMvcTest(AuthorPageController.class)
+class AuthorPageControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean

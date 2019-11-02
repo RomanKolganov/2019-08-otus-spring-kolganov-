@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.domain.Author;
 import me.kolganov.springmvcview.domain.Book;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class BookController {
+public class BookPageController {
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
 
-    public BookController(BookService bookService, AuthorService authorService, GenreService genreService) {
+    public BookPageController(BookService bookService, AuthorService authorService, GenreService genreService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.genreService = genreService;

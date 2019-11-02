@@ -1,4 +1,4 @@
-package me.kolganov.springmvcview.controller;
+package me.kolganov.springmvcview.page;
 
 import me.kolganov.springmvcview.domain.Author;
 import me.kolganov.springmvcview.service.AuthorService;
@@ -9,30 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class AuthorController {
+public class AuthorPageController {
     private final AuthorService authorService;
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorPageController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
     @GetMapping(value = "/authors")
-    public String getAll(Model model) {
-        List<Author> authors = authorService.getAll();
-        model.addAttribute("authors", authors);
+    public String getAll() {
         return "author";
-    }
-
-    @PostMapping(value = "/authors/delete")
-    public String delete(@RequestParam("id") long id) {
-        authorService.delete(id);
-        return "redirect:/authors";
-    }
-
-    @PostMapping(value = "/authors/create")
-    public String create(@RequestParam("name") String name) {
-        authorService.save(new Author(name));
-        return "redirect:/authors";
     }
 
     @GetMapping(value = "/authors/edit")

@@ -8,34 +8,46 @@ $(document).ready(function() {
         fields: {
             nameInput: {
                 identifier : 'name',
-                rules: [
-                    {type : 'empty'}
-                ]
+                rules: [{type : 'empty'}]
             },
             txtInput: {
                 identifier : 'text',
-                rules: [
-                    {type : 'empty'}
-                ]
+                rules: [{type : 'empty'}]
             },
             authorDropdown: {
                 identifier : 'author_id',
-                rules: [
-                    {type : 'empty'}
-                ]
+                rules: [{type : 'empty'}]
             },
             genreDropdown: {
                 identifier : 'genre_id',
-                rules: [
-                    {type : 'empty'}
-                ]
+                rules: [{type : 'empty'}]
             },
             bookDropdown: {
                 identifier : 'book_id',
-                rules: [
-                    {type : 'empty'}
-                ]
+                rules: [{type : 'empty'}]
             }
         }
     });
 });
+
+function deleteEntity(url, id, table) {
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        data: {"id": id},
+        success: function () {
+            table.DataTable().ajax.reload();
+        }
+    });
+}
+
+function createEntity(url, name, table) {
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {"name": name},
+        success: function () {
+            table.DataTable().ajax.reload();
+        }
+    });
+}
