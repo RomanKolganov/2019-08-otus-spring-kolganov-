@@ -32,7 +32,22 @@
             </div>
             <button id="btnAdd" class="ui submit button"><i class="ui plus icon"></i>Добавить</button>
         </div>
-        <button id="btnSave" class="ui submit button"><i class="ui plus icon"></i>Обновить</button>
+    </div>
+    <div class="ui modal">
+        <div class="header">Редактирование автора</div>
+        <div class="content">
+            <div class="ui form">
+                <input id="upd-nameId" type="hidden" name="id">
+                <div class="field">
+                    <label>Имя автора</label>
+                    <input id="upd-nameInput" class="nameInput" type="text" name="name" placeholder="Введите имя автора">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
     </div>
 <script>
     $(document).ready(function () {
@@ -48,11 +63,11 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return  '<button class="ui button" onclick=deleteEntity("authors/delete",'+row["id"]+',$("#authorsTable"));>' +
+                        return  '<button class="ui button" onclick=deleteEntity("authors/delete",'+row.id+',$("#authorsTable"));>' +
                                     '<i class="ui close icon"></i>Удалить' +
                                 '</button>' +
-                                '<button id="btnUpdate" class="ui button">' +
-                                    '<i class="ui cogs icon"></i> Ред.' +
+                                '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.name+'\");\'>' +
+                                    '<i class="ui cogs icon"></i>Ред.' +
                                 '</button>';
                     }
                 }
@@ -67,18 +82,26 @@
             }
         });
 
-        $("#btnUpdate").on("click", function () {
-            //todo: всплывающее окно с формой отправки
-        });
-
         $("#btnSave").on("click", function () {
-            var data = {
-                "id": 1,
-                "name": "ff"
-            };
-            updateEntity("authors/update", data, $("#authorsTable"))
+            var id = $("#upd-nameId").val();
+            var name = $("#upd-nameInput").val();
+            if (name !== "") {
+                var data = {
+                    "id": id,
+                    "name": name
+                };
+                updateEntity("authors/update", data, $("#authorsTable"));
+                $(".ui.modal").modal('hide');
+            }
         })
      });
+
+    function showModal(id, name) {
+        $("#upd-nameId").val(id);
+        $("#upd-nameInput").val(name);
+
+        $(".ui.modal").modal('show');
+    }
 </script>
 </body>
 </html>
