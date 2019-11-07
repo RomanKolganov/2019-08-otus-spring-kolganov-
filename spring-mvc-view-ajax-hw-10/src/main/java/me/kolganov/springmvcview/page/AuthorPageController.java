@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AuthorPageController {
     @GetMapping(value = "/authors")
-    public String getAll() {
+    public String getPage() {
         return "author";
     }
 }

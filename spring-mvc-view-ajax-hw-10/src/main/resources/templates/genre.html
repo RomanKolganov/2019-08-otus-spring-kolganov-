@@ -2,48 +2,106 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/webjars/datatables/1.10.20/css/dataTables.semanticui.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/webjars/datatables/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="/webjars/datatables/1.10.20/js/dataTables.semanticui.js"></script>
     <script src="/js/main.js"></script>
-    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
     <title>Жанры</title>
 </head>
 <body>
     <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
         <h1 class="ui header">Жанры</h1>
-        <table class="ui table">
+        <table id="genresTable" class="ui table">
             <thead>
             <tr>
                 <th>id</th>
-                <th>Жанр</th>
+                <th>Название жанра</th>
                 <th>Действия</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="genre : ${genres}">
-                <td th:text="${genre.id}">73</td>
-                <td th:text="${genre.name}">Название жанра</td>
-                <td>
-                    <form action="genres/delete" method="post">
-                        <input th:value="${genre.id}" type="hidden" name="id">
-                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
-                        <a class="ui button" th:href="@{genres/edit(id=${genre.id})}" href="genreEdit.html">
-                            <i class="ui cogs icon"></i> Ред.
-                        </a>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
         </table>
-        <form class="ui form" action="genres/create" method="post">
+        <div class="ui form">
             <div class="field">
                 <label>Название жанра</label>
-                <input class="nameInput" type="text" name="name" placeholder="Введите название жанра">
+                <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
             </div>
-            <button class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
-        </form>
+            <button id="btnAdd" class="ui submit button" type="submit"><i class="ui plus icon"></i>Добавить</button>
+        </div>
     </div>
+    <div class="ui modal">
+        <div class="header">Редактирование жанра</div>
+        <div class="content">
+            <div class="ui form">
+                <input id="upd-nameId" type="hidden" name="id">
+                <div class="field">
+                    <label>Название жанра</label>
+                    <input id="upd-nameInput" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#genresTable").dataTable({
+            ajax: {
+                url: "genres/getAllGenres",
+                type: "GET",
+                dataSrc: ""
+            },
+            columns: [
+                {"data": "id"},
+                {"data": "name"},
+                {
+                    "data": "",
+                    "render": function (data, type, row) {
+                        return  '<button class="ui button" onclick=deleteEntity("genres/delete",'+row.id+',$("#genresTable"));>' +
+                                    '<i class="ui close icon"></i>Удалить' +
+                                '</button>' +
+                                '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.name+'\");\'>' +
+                                    '<i class="ui cogs icon"></i>Ред.' +
+                                '</button>';
+                    }
+                }
+            ]
+        });
+
+        $("#btnAdd").on("click", function () {
+            var nameValue = $("#nameInput").val();
+            if (nameValue !== "") {
+                var data = {"name": nameValue};
+                createEntity("genres/create", data, $("#genresTable"));
+            }
+        });
+
+        $("#btnSave").on("click", function () {
+            var id = $("#upd-nameId").val();
+            var name = $("#upd-nameInput").val();
+            if (name !== "") {
+                var data = {
+                    "id": id,
+                    "name": name
+                };
+                updateEntity("genres/update", data, $("#genresTable"));
+                $(".ui.modal").modal('hide');
+            }
+        })
+    });
+
+    function showModal(id, name) {
+        $("#upd-nameId").val(id);
+        $("#upd-nameInput").val(name);
+
+        $(".ui.modal").modal('show');
+    }
+</script>
 </body>
 </html>

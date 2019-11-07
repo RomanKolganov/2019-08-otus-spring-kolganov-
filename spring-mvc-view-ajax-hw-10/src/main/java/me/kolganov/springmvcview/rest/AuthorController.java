@@ -33,7 +33,7 @@ public class AuthorController {
     }
 
     @PutMapping(value = "/authors/update")
-    public void update(@RequestBody AuthorDto authorDto) {
+    public void updateAuthor(@RequestBody AuthorDto authorDto) {
         authorService.update(AuthorDto.toEntity(authorDto));
     }
 }
