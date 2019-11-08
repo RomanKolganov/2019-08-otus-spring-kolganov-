@@ -2,7 +2,6 @@ package me.kolganov.springmvcview.rest;
 
 import me.kolganov.springmvcview.domain.Comment;
 import me.kolganov.springmvcview.rest.dto.CommentDto;
-import me.kolganov.springmvcview.service.BookService;
 import me.kolganov.springmvcview.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +11,9 @@ import java.util.stream.Collectors;
 @RestController
 public class CommentController {
     private final CommentService commentService;
-    private final BookService bookService;
 
-    public CommentController(CommentService commentService, BookService bookService) {
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
-        this.bookService = bookService;
     }
 
     @GetMapping(value = "/comments/getAllComments", produces = "application/json")
