@@ -2,50 +2,126 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/webjars/datatables/1.10.20/css/dataTables.semanticui.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/webjars/datatables/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="/webjars/datatables/1.10.20/js/dataTables.semanticui.js"></script>
     <script src="/js/main.js"></script>
-    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
     <title>Комментарии</title>
 </head>
 <body>
     <div th:insert="~{menu :: menu}"></div>
     <div class="ui container">
         <h1 class="ui header">Комментарии</h1>
-        <table class="ui table">
+        <table id="commentsTable" class="ui table">
             <thead>
             <tr>
                 <th>id</th>
-                <th>Текст комментария</th>
+                <th>Название жанра</th>
                 <th>Действия</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="comment : ${comments}">
-                <td th:text="${comment.id}">73</td>
-                <td th:text="${comment.text}">Текст комментария</td>
-                <td>
-                    <form action="comments/delete" method="post">
-                        <input th:value="${comment.id}" type="hidden" name="id">
-                        <input th:value="${bookId}" type="hidden" name="book_id">
-                        <button class="ui button" type="submit"><i class="ui close icon"></i>Удалить</button>
-                        <a class="ui button" th:href="@{comments/edit(id=${comment.id})}" href="commentEdit.html">
-                            <i class="ui cogs icon"></i>Ред.
-                        </a>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
         </table>
-        <form class="ui form" action="comments/create" method="post">
+        <div class="ui form">
             <input th:value="${bookId}" type="hidden" name="book_id">
             <div class="field">
                 <label>Новый комментарий</label>
-                <input class="txtInput" type="text" name="text" placeholder="Введите текст комментария">
+                <input id="textInput" class="textInput" type="text" name="text" placeholder="Введите текст комментария">
             </div>
-            <button class="ui button" type="submit"><i class="ui plus icon"></i>Добавить</button>
-        </form>
+            <button id="btnAdd" class="ui button"><i class="ui plus icon"></i>Добавить</button>
+        </div>
     </div>
+    <div class="ui modal">
+        <div class="header">Редактирование книги</div>
+        <div class="content">
+            <div class="ui form">
+                <input id="upd-textId" type="hidden" name="id">
+                <div class="field">
+                    <label>Текст комментария</label>
+                    <input id="upd-textInput" class="textInput" type="text" name="text" placeholder="Напишите комментарий">
+                </div>
+                <div class="field">
+                    <label>Книги</label>
+                    <select id="upd-bookSelect" class="ui fluid search dropdown bookDropdown" name="book_id">
+                        <option value="">Выберите книгу</option>
+                        <option th:each="book : ${books}"
+                                th:value="${book.id}"
+                                th:text="${book.name}">
+                            Название книги
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#commentsTable").dataTable({
+            ajax: {
+                url: "comments/getAllComments",
+                type: "GET",
+                data: {"book_id": [[${bookId}]]},
+                dataSrc: ""
+            },
+            columns: [
+                {"data": "id"},
+                {"data": "text"},
+                {
+                    "data": "",
+                    "render": function (data, type, row) {
+                        return  '<button class="ui button" onclick=deleteEntity("comments/delete",'+row.id+',$("#commentsTable"));>' +
+                                    '<i class="ui close icon"></i>Удалить' +
+                                '</button>' +
+                                '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.text+'\",'+row.bookDto.id+');\'>' +
+                                    '<i class="ui cogs icon"></i>Ред.' +
+                                '</button>';
+                    }
+                }
+            ]
+        });
+
+        $("#btnAdd").on("click", function () {
+            var textValue = $("#textInput").val();
+            if (textValue !== "") {
+                var data = {
+                    "text": textValue,
+                    "book_id": [[${bookId}]]
+                };
+                createEntity("comments/create", data, $("#commentsTable"));
+            }
+        });
+
+        $("#btnSave").on("click", function () {
+            var id = $("#upd-textId").val();
+            var text = $("#upd-textInput").val();
+            var bookId = $("#upd-bookSelect").val();
+
+            if (text !== "" && bookId !== "") {
+                var data = {
+                    "id": id,
+                    "text": text,
+                    "bookDto": {"id": bookId}
+                };
+                updateEntity("comments/update", data, $("#commentsTable"));
+                $(".ui.modal").modal('hide');
+            }
+        })
+    });
+
+    function showModal(id, text, book_id) {
+        $("#upd-textId").val(id);
+        $("#upd-textInput").val(text);
+        $("#upd-bookSelect").dropdown('set selected', book_id);
+
+        $(".ui.modal").modal('show');
+    }
+</script>
 </body>
 </html>

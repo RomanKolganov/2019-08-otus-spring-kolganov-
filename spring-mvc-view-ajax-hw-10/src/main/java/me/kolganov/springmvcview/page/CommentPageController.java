@@ -21,42 +21,13 @@ public class CommentPageController {
     }
 
     @GetMapping(value = "/comments")
-    public String getAll(@RequestParam("book_id") long bookId, Model model) {
+    public String getPage(@RequestParam("book_id") long bookId, Model model) {
         List<Comment> comments = commentService.getAllByBookId(bookId);
-        model.addAttribute("bookId", bookId);
-        model.addAttribute("comments", comments);
-        return "comment";
-    }
-
-    @PostMapping(value = "/comments/delete")
-    public String delete(@RequestParam("book_id") long bookId,
-                         @RequestParam("id") long id) {
-        commentService.delete(id);
-        return "redirect:/comments?book_id="+bookId;
-    }
-
-    @PostMapping(value = "/comments/create")
-    public String create(@RequestParam("text") String text,
-                         @RequestParam("book_id") long bookId) {
-        commentService.save(new Comment(text), bookId);
-        return "redirect:/comments?book_id="+bookId;
-    }
-
-    @GetMapping(value = "/comments/edit")
-    public String getOne(@RequestParam("id") long id, Model model) {
-        Comment comment = commentService.getById(id);
         List<Book> books = bookService.getAll();
 
-        model.addAttribute("comment", comment);
+        model.addAttribute("bookId", bookId);
+        model.addAttribute("comments", comments);
         model.addAttribute("books", books);
-        return "commentEdit";
-    }
-
-    @PostMapping(value = "/comments/update")
-    public String update(@RequestParam("id") long id,
-                         @RequestParam("text") String text,
-                         @RequestParam("book_id") long bookId) {
-        commentService.update(new Comment(id, text), bookId);
-        return "redirect:/comments?book_id="+bookId;
+        return "comment";
     }
 }

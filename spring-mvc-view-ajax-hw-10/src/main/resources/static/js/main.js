@@ -10,7 +10,7 @@ $(document).ready(function() {
                 identifier : 'name',
                 rules: [{type : 'empty'}]
             },
-            txtInput: {
+            textInput: {
                 identifier : 'text',
                 rules: [{type : 'empty'}]
             },
