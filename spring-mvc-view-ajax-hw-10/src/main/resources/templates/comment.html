@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
     <link href="/webjars/datatables/1.10.20/css/dataTables.semanticui.css" rel="stylesheet">
+    <link href="/webjars/datatables-buttons/1.6.0/css/buttons.semanticui.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/webjars/datatables/1.10.20/js/jquery.dataTables.js"></script>
     <script src="/webjars/datatables/1.10.20/js/dataTables.semanticui.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/dataTables.buttons.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/buttons.semanticui.js"></script>
     <script src="/js/main.js"></script>
     <title>Комментарии</title>
 </head>
@@ -20,22 +23,14 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Название жанра</th>
+                <th>Текст комментария</th>
                 <th>Действия</th>
             </tr>
             </thead>
         </table>
-        <div class="ui form">
-            <input th:value="${bookId}" type="hidden" name="book_id">
-            <div class="field">
-                <label>Новый комментарий</label>
-                <input id="textInput" class="textInput" type="text" name="text" placeholder="Введите текст комментария">
-            </div>
-            <button id="btnAdd" class="ui button"><i class="ui plus icon"></i>Добавить</button>
-        </div>
     </div>
-    <div class="ui modal">
-        <div class="header">Редактирование книги</div>
+    <div id="editModal" class="ui modal">
+        <div class="header">Редактирование комментария</div>
         <div class="content">
             <div class="ui form">
                 <input id="upd-textId" type="hidden" name="id">
@@ -44,7 +39,7 @@
                     <input id="upd-textInput" class="textInput" type="text" name="text" placeholder="Напишите комментарий">
                 </div>
                 <div class="field">
-                    <label>Книги</label>
+                    <label>Книга</label>
                     <select id="upd-bookSelect" class="ui fluid search dropdown bookDropdown" name="book_id">
                         <option value="">Выберите книгу</option>
                         <option th:each="book : ${books}"
@@ -57,13 +52,29 @@
             </div>
         </div>
         <div class="actions">
-            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <button id="btnSave" class="ui button">OK</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
+    </div>
+    <div id="addModal" class="ui modal">
+        <div class="header">Добавить новый комментарий</div>
+        <div class="content">
+            <div class="ui form">
+                <input th:value="${bookId}" type="hidden" name="book_id">
+                <div class="field">
+                    <label>Новый комментарий</label>
+                    <input id="textInput" class="textInput" type="text" name="text" placeholder="Введите текст комментария">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnAdd" class="ui submit button">OK</button>
             <div class="ui cancel button">Отмена</div>
         </div>
     </div>
 <script>
     $(document).ready(function () {
-        $("#commentsTable").dataTable({
+        var table = $("#commentsTable").DataTable({
             ajax: {
                 url: "comments/getAllComments",
                 type: "GET",
@@ -84,8 +95,21 @@
                                 '</button>';
                     }
                 }
-            ]
+            ],
+            lengthChange: false
         });
+
+        new $.fn.dataTable.Buttons(table, [
+            {
+                text: '<i class="plus icon"></i>Добавить',
+                action: function () {
+                    $("#addModal").modal('show');
+                }
+            }
+        ]);
+
+        table.buttons().container()
+            .appendTo($('div.eight.column:eq(0)', table.table().container()));
 
         $("#btnAdd").on("click", function () {
             var textValue = $("#textInput").val();
@@ -95,6 +119,8 @@
                     "book_id": [[${bookId}]]
                 };
                 createEntity("comments/create", data, $("#commentsTable"));
+                $("#addModal").modal('hide');
+                $("#textInput").val("");
             }
         });
 
@@ -110,7 +136,7 @@
                     "bookDto": {"id": bookId}
                 };
                 updateEntity("comments/update", data, $("#commentsTable"));
-                $(".ui.modal").modal('hide');
+                $("#editModal").modal('hide');
             }
         })
     });
@@ -120,7 +146,7 @@
         $("#upd-textInput").val(text);
         $("#upd-bookSelect").dropdown('set selected', book_id);
 
-        $(".ui.modal").modal('show');
+        $("#editModal").modal('show');
     }
 </script>
 </body>

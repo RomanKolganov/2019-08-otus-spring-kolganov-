@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
     <link href="/webjars/datatables/1.10.20/css/dataTables.semanticui.css" rel="stylesheet">
+    <link href="/webjars/datatables-buttons/1.6.0/css/buttons.semanticui.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/webjars/datatables/1.10.20/js/jquery.dataTables.js"></script>
     <script src="/webjars/datatables/1.10.20/js/dataTables.semanticui.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/dataTables.buttons.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/buttons.semanticui.js"></script>
     <script src="/js/main.js"></script>
     <title>Жанры</title>
 </head>
@@ -25,15 +28,8 @@
             </tr>
             </thead>
         </table>
-        <div class="ui form">
-            <div class="field">
-                <label>Название жанра</label>
-                <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
-            </div>
-            <button id="btnAdd" class="ui submit button"><i class="ui plus icon"></i>Добавить</button>
-        </div>
     </div>
-    <div class="ui modal">
+    <div id="editModal" class="ui modal">
         <div class="header">Редактирование жанра</div>
         <div class="content">
             <div class="ui form">
@@ -45,18 +41,34 @@
             </div>
         </div>
         <div class="actions">
-            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <button id="btnSave" class="ui button">OK</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
+    </div>
+    <div id="addModal" class="ui modal">
+        <div class="header">Добавить новый жанр</div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>Название жанра</label>
+                    <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnAdd" class="ui submit button">OK</button>
             <div class="ui cancel button">Отмена</div>
         </div>
     </div>
 <script>
     $(document).ready(function () {
-        $("#genresTable").dataTable({
+        var table = $("#genresTable").DataTable({
             ajax: {
                 url: "genres/getAllGenres",
                 type: "GET",
                 dataSrc: ""
             },
+            order: [1, 'asc'],
             columns: [
                 {"data": "id"},
                 {"data": "name"},
@@ -71,14 +83,29 @@
                                 '</button>';
                     }
                 }
-            ]
+            ],
+            lengthChange: false
         });
+
+        new $.fn.dataTable.Buttons(table, [
+            {
+                text: '<i class="plus icon"></i>Добавить',
+                action: function () {
+                    $("#addModal").modal('show');
+                }
+            }
+        ]);
+
+        table.buttons().container()
+            .appendTo($('div.eight.column:eq(0)', table.table().container()));
 
         $("#btnAdd").on("click", function () {
             var nameValue = $("#nameInput").val();
             if (nameValue !== "") {
                 var data = {"name": nameValue};
                 createEntity("genres/create", data, $("#genresTable"));
+                $("#addModal").modal('hide');
+                $("#nameInput").val("");
             }
         });
 
@@ -91,7 +118,7 @@
                     "name": name
                 };
                 updateEntity("genres/update", data, $("#genresTable"));
-                $(".ui.modal").modal('hide');
+                $("#editModal").modal('hide');
             }
         })
     });
@@ -100,7 +127,7 @@
         $("#upd-nameId").val(id);
         $("#upd-nameInput").val(name);
 
-        $(".ui.modal").modal('show');
+        $("#editModal").modal('show');
     }
 </script>
 </body>

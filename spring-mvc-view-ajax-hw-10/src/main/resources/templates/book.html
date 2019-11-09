@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
     <link href="/webjars/datatables/1.10.20/css/dataTables.semanticui.css" rel="stylesheet">
+    <link href="/webjars/datatables-buttons/1.6.0/css/buttons.semanticui.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
     <script src="/webjars/datatables/1.10.20/js/jquery.dataTables.js"></script>
     <script src="/webjars/datatables/1.10.20/js/dataTables.semanticui.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/dataTables.buttons.js"></script>
+    <script src="/webjars/datatables-buttons/1.6.0/js/buttons.semanticui.js"></script>
     <script src="/js/main.js"></script>
     <title>Книги</title>
 </head>
@@ -28,63 +31,21 @@
             </tr>
             </thead>
         </table>
-        <h3 class="ui dividing header">Добавить книгу</h3>
-        <div class="ui form">
-            <div class="field">
-                <label>Название книги</label>
-                <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите название книги">
-            </div>
-            <div class="ui grid">
-                <div class="two column row">
-                    <div class="column">
-                        <div class="field">
-                            <label>Авторы</label>
-                            <select id="authorSelect" class="ui fluid search dropdown authorDropdown" name="author_id">
-                                <option value="">Выберите автора</option>
-                                <option th:each="author : ${authors}"
-                                        th:value="${author.id}"
-                                        th:text="${author.name}">
-                                    Имя автора
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="field">
-                            <label>Жанры</label>
-                            <select id="genreSelect" class="ui fluid search dropdown genreDropdown" name="genre_id">
-                                <option value="">Выберите жанр</option>
-                                <option th:each="genre : ${genres}"
-                                        th:value="${genre.id}"
-                                        th:text="${genre.name}">
-                                    Название жанра
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column">
-                        <button id="btnAdd" class="ui submit button"><i class="ui plus icon"></i>Добавить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="ui modal">
+    <div id="editModal" class="ui modal">
         <div class="header">Редактирование книги</div>
         <div class="content">
             <div class="ui form">
                 <input id="upd-nameId" type="hidden" name="id">
                 <div class="field">
-                    <label>Название жанра</label>
+                    <label>Название книги</label>
                     <input id="upd-nameInput" class="nameInput" type="text" name="name" placeholder="Введите название жанра">
                 </div>
                 <div class="ui grid">
                     <div class="two column row">
                         <div class="column">
                             <div class="field">
-                                <label>Авторы</label>
+                                <label>Автор</label>
                                 <select id="upd-authorSelect" class="ui fluid search dropdown" name="author_id">
                                     <option value="">Выберите автора</option>
                                     <option th:each="author : ${authors}"
@@ -97,7 +58,7 @@
                         </div>
                         <div class="column">
                             <div class="field">
-                                <label>Жанры</label>
+                                <label>Жанр</label>
                                 <select id="upd-genreSelect" class="ui fluid search dropdown" name="genre_id">
                                     <option value="">Выберите жанр</option>
                                     <option th:each="genre : ${genres}"
@@ -113,13 +74,58 @@
             </div>
         </div>
         <div class="actions">
-            <button id="btnSave" class="ui button"><i class="ui plus icon"></i>Обновить</button>
+            <button id="btnSave" class="ui button">OK</button>
+            <div class="ui cancel button">Отмена</div>
+        </div>
+    </div>
+    <div id="addModal" class="ui modal">
+        <div class="header">Добавить новую книгу</div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>Название книги</label>
+                    <input id="nameInput" class="nameInput" type="text" name="name" placeholder="Введите название книги">
+                </div>
+                <div class="ui grid">
+                    <div class="two column row">
+                        <div class="column">
+                            <div class="field">
+                                <label>Автор</label>
+                                <select id="authorSelect" class="ui fluid search dropdown authorDropdown" name="author_id">
+                                    <option value="">Выберите автора</option>
+                                    <option th:each="author : ${authors}"
+                                            th:value="${author.id}"
+                                            th:text="${author.name}">
+                                        Имя автора
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label>Жанр</label>
+                                <select id="genreSelect" class="ui fluid search dropdown genreDropdown" name="genre_id">
+                                    <option value="">Выберите жанр</option>
+                                    <option th:each="genre : ${genres}"
+                                            th:value="${genre.id}"
+                                            th:text="${genre.name}">
+                                        Название жанра
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="btnAdd" class="ui button">OK</button>
             <div class="ui cancel button">Отмена</div>
         </div>
     </div>
 <script>
     $(document).ready(function () {
-        $("#booksTable").dataTable({
+        var table = $("#booksTable").DataTable({
             ajax: {
                 url: "books/getAllBooks",
                 type: "GET",
@@ -150,8 +156,21 @@
                                 '</button>';
                     }
                 }
-            ]
+            ],
+            lengthChange: false
         });
+
+        new $.fn.dataTable.Buttons(table, [
+            {
+                text: '<i class="plus icon"></i>Добавить',
+                action: function () {
+                    $("#addModal").modal('show');
+                }
+            }
+        ]);
+
+        table.buttons().container()
+            .appendTo($('div.eight.column:eq(0)', table.table().container()));
 
         $("#btnAdd").on("click", function () {
             var nameValue = $("#nameInput").val();
@@ -165,6 +184,8 @@
                     "genre_id": genreId,
                 };
                 createEntity("books/create", data, $("#booksTable"));
+                $("#addModal").modal('hide');
+                $("#nameInput").val("");
             }
         });
         $("#btnSave").on("click", function () {
@@ -181,7 +202,7 @@
                     "genreDto": {"id": genreId}
                 };
                 updateEntity("books/update", data, $("#booksTable"));
-                $(".ui.modal").modal('hide');
+                $("#editModal").modal('hide');
             }
         })
     });
@@ -192,7 +213,7 @@
         $("#upd-authorSelect").dropdown('set selected', author_id);
         $("#upd-genreSelect").dropdown('set selected', genre_id);
 
-        $(".ui.modal").modal('show');
+        $("#editModal").modal('show');
     }
 </script>
 </body>
