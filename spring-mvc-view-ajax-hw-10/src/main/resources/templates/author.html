@@ -64,7 +64,7 @@
     $(document).ready(function () {
         var table = $("#authorsTable").DataTable({
             ajax: {
-                url: "authors/getAllAuthors",
+                url: "author/",
                 type: "GET",
                 dataSrc: ""
             },
@@ -75,7 +75,7 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return  '<button class="ui button" onclick=deleteEntity("authors/delete",'+row.id+',$("#authorsTable"));>' +
+                        return  '<button class="ui button" onclick=deleteEntity("author/'+row.id+'",$("#authorsTable"));>' +
                                     '<i class="ui close icon"></i>Удалить' +
                                 '</button>' +
                                 '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.name+'\");\'>' +
@@ -103,7 +103,7 @@
             var nameValue = $("#nameInput").val();
             if (nameValue !== "") {
                 var data = {"name": nameValue};
-                createEntity("authors/create", data, $("#authorsTable"));
+                createEntity("author/", data, $("#authorsTable"));
                 $("#addModal").modal('hide');
                 $("#nameInput").val("");
             }
@@ -117,7 +117,7 @@
                     "id": id,
                     "name": name
                 };
-                updateEntity("authors/update", data, $("#authorsTable"));
+                updateEntity("author/"+id, data, $("#authorsTable"));
                 $("#editModal").modal('hide');
             }
         })

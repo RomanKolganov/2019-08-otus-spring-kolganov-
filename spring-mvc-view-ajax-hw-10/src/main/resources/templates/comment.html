@@ -76,9 +76,8 @@
     $(document).ready(function () {
         var table = $("#commentsTable").DataTable({
             ajax: {
-                url: "comments/getAllComments",
+                url: "comment/"+[[${bookId}]],
                 type: "GET",
-                data: {"book_id": [[${bookId}]]},
                 dataSrc: ""
             },
             columns: [
@@ -87,7 +86,7 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return  '<button class="ui button" onclick=deleteEntity("comments/delete",'+row.id+',$("#commentsTable"));>' +
+                        return  '<button class="ui button" onclick=deleteEntity("comment/'+row.id+'",$("#commentsTable"));>' +
                                     '<i class="ui close icon"></i>Удалить' +
                                 '</button>' +
                                 '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.text+'\",'+row.bookDto.id+');\'>' +
@@ -118,7 +117,7 @@
                     "text": textValue,
                     "book_id": [[${bookId}]]
                 };
-                createEntity("comments/create", data, $("#commentsTable"));
+                createEntity("comment/", data, $("#commentsTable"));
                 $("#addModal").modal('hide');
                 $("#textInput").val("");
             }
@@ -135,7 +134,7 @@
                     "text": text,
                     "bookDto": {"id": bookId}
                 };
-                updateEntity("comments/update", data, $("#commentsTable"));
+                updateEntity("comment/"+id, data, $("#commentsTable"));
                 $("#editModal").modal('hide');
             }
         })

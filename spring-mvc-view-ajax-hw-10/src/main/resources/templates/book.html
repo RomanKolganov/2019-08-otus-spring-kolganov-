@@ -127,7 +127,7 @@
     $(document).ready(function () {
         var table = $("#booksTable").DataTable({
             ajax: {
-                url: "books/getAllBooks",
+                url: "book/",
                 type: "GET",
                 dataSrc: ""
             },
@@ -148,7 +148,7 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return  '<button class="ui button" onclick=deleteEntity("books/delete",'+row.id+',$("#booksTable"));>' +
+                        return  '<button class="ui button" onclick=deleteEntity("book/'+row.id+'",$("#booksTable"));>' +
                                     '<i class="ui close icon"></i>Удалить' +
                                 '</button>' +
                                 '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.name+'\",'+row.authorDto.id+','+row.genreDto.id+');\'>' +
@@ -183,7 +183,7 @@
                     "author_id": authorId,
                     "genre_id": genreId,
                 };
-                createEntity("books/create", data, $("#booksTable"));
+                createEntity("book/", data, $("#booksTable"));
                 $("#addModal").modal('hide');
                 $("#nameInput").val("");
             }
@@ -201,7 +201,7 @@
                     "authorDto": {"id": authorId},
                     "genreDto": {"id": genreId}
                 };
-                updateEntity("books/update", data, $("#booksTable"));
+                updateEntity("book/"+id, data, $("#booksTable"));
                 $("#editModal").modal('hide');
             }
         })

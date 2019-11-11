@@ -16,24 +16,24 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping(value = "/comments/getAllComments", produces = "application/json")
-    public List<CommentDto> getAllComments(@RequestParam("book_id") long bookId) {
+    @GetMapping(value = "/comment/{book_id}", produces = "application/json")
+    public List<CommentDto> getAllComments(@PathVariable("book_id") long bookId) {
         return commentService.getAllByBookId(bookId).stream().map(CommentDto::toDto)
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping(value = "/comments/delete")
-    public void delete(@RequestParam("id") long id) {
+    @DeleteMapping(value = "/comment/{id}")
+    public void delete(@PathVariable("id") long id) {
         commentService.delete(id);
     }
 
-    @PostMapping(value = "/comments/create")
+    @PostMapping(value = "/comment/")
     public void createComment(@RequestParam("text") String text,
                               @RequestParam("book_id") long bookId) {
         commentService.save(new Comment(text), bookId);
     }
 
-    @PutMapping(value = "/comments/update")
+    @PutMapping(value = "/comment/{id}")
     public void updateComment(@RequestBody CommentDto commentDto) {
         commentService.update(new Comment(commentDto.getId(), commentDto.getText()), commentDto.getBookDto().getId());
     }

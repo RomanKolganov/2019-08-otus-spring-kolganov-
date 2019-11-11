@@ -16,23 +16,23 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping(value = "/authors/getAllAuthors", produces = "application/json")
+    @GetMapping(value = "/author/", produces = "application/json")
     public List<AuthorDto> getAllAuthors() {
         return authorService.getAll().stream().map(AuthorDto::toDto)
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping("/authors/delete")
-    public void deleteAuthor(@RequestParam("id") long id) {
+    @DeleteMapping("/author/{id}")
+    public void deleteAuthor(@PathVariable("id") long id) {
         authorService.delete(id);
     }
 
-    @PostMapping("/authors/create")
+    @PostMapping("/author/")
     public void createAuthor(@RequestParam("name") String name) {
         authorService.save(new Author(name));
     }
 
-    @PutMapping(value = "/authors/update")
+    @PutMapping(value = "/author/{id}")
     public void updateAuthor(@RequestBody AuthorDto authorDto) {
         authorService.update(AuthorDto.toEntity(authorDto));
     }

@@ -30,11 +30,10 @@ $(document).ready(function() {
     });
 });
 
-function deleteEntity(url, id, table) {
+function deleteEntity(url, table) {
     $.ajax({
         url: url,
         type: 'DELETE',
-        data: {"id": id},
         success: function () {
             table.DataTable().ajax.reload();
         }

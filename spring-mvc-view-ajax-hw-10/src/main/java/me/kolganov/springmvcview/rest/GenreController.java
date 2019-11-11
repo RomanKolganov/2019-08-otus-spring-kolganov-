@@ -16,23 +16,23 @@ public class GenreController {
         this.genreService = genreService;
     }
 
-    @GetMapping(value = "/genres/getAllGenres", produces = "application/json")
+    @GetMapping(value = "/genre/", produces = "application/json")
     public List<GenreDto> getAllGenres() {
         return genreService.getAll().stream().map(GenreDto::toDto)
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping(value = "/genres/delete")
-    public void deleteGenre(@RequestParam("id") long id) {
+    @DeleteMapping(value = "/genre/{id}")
+    public void deleteGenre(@PathVariable("id") long id) {
         genreService.delete(id);
     }
 
-    @PostMapping(value = "/genres/create")
+    @PostMapping(value = "/genre/")
     public void createGenre(@RequestParam("name") String name) {
         genreService.save(new Genre(name));
     }
 
-    @PutMapping(value = "/genres/update")
+    @PutMapping(value = "/genre/{id}")
     public void updateGenre(@RequestBody GenreDto genreDto) {
         genreService.update(GenreDto.toEntity(genreDto));
     }

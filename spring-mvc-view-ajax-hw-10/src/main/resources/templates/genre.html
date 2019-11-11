@@ -64,7 +64,7 @@
     $(document).ready(function () {
         var table = $("#genresTable").DataTable({
             ajax: {
-                url: "genres/getAllGenres",
+                url: "genre/",
                 type: "GET",
                 dataSrc: ""
             },
@@ -75,7 +75,7 @@
                 {
                     "data": "",
                     "render": function (data, type, row) {
-                        return  '<button class="ui button" onclick=deleteEntity("genres/delete",'+row.id+',$("#genresTable"));>' +
+                        return  '<button class="ui button" onclick=deleteEntity("genre/'+row.id+'",$("#genresTable"));>' +
                                     '<i class="ui close icon"></i>Удалить' +
                                 '</button>' +
                                 '<button class="ui button" onclick=\'showModal('+row.id+',\"'+row.name+'\");\'>' +
@@ -103,7 +103,7 @@
             var nameValue = $("#nameInput").val();
             if (nameValue !== "") {
                 var data = {"name": nameValue};
-                createEntity("genres/create", data, $("#genresTable"));
+                createEntity("genre/", data, $("#genresTable"));
                 $("#addModal").modal('hide');
                 $("#nameInput").val("");
             }
@@ -117,7 +117,7 @@
                     "id": id,
                     "name": name
                 };
-                updateEntity("genres/update", data, $("#genresTable"));
+                updateEntity("genre/"+id, data, $("#genresTable"));
                 $("#editModal").modal('hide');
             }
         })

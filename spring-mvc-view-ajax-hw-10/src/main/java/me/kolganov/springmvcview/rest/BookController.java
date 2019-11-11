@@ -16,25 +16,25 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(value = "/books/getAllBooks", produces = "application/json")
+    @GetMapping(value = "/book/", produces = "application/json")
     public List<BookDto> getAllBooks() {
         return bookService.getAll().stream().map(BookDto::toDto)
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping(value = "/books/delete")
-    public void delete(@RequestParam("id") long id) {
+    @DeleteMapping(value = "/book/{id}")
+    public void delete(@PathVariable("id") long id) {
         bookService.delete(id);
     }
 
-    @PostMapping(value = "/books/create")
+    @PostMapping(value = "/book/")
     public void create(@RequestParam("name") String name,
                        @RequestParam("author_id") long authorId,
                        @RequestParam("genre_id") long genreId) {
         bookService.save(new Book(name), authorId, genreId);
     }
 
-    @PutMapping(value = "/books/update")
+    @PutMapping(value = "/book/{id}")
     public void update(@RequestBody BookDto bookDto) {
         bookService.update(new Book(bookDto.getId(),
                 bookDto.getName()),
