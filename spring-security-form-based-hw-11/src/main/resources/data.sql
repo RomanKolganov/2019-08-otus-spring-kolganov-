@@ -21,5 +21,10 @@ insert into comments (text, book_id) values ('Концовка норм :)', 1);
 insert into comments (text, book_id) values ('Один из лучших романов классической английской литературы.', 8);
 
 insert into users (login, password) values ('user', '$2y$12$kEFfx0yBfPoi.ifh5UIVg.R8dV2HXkqNZQ07JbnFa6u08k.gjy0Zi');
-insert into roles (role) values ('user');
-insert into user_roles(user_id, role_id) values (1, 1);
+insert into users (login, password) values ('admin', '$2y$12$CAfCUuPOludlZWC.0KER3.7DjdBVT0iL69UvabUJZM01WzhQF9/6O');
+
+insert into roles (role) values ('USER');
+insert into roles (role) values ('ADMIN');
+
+insert into user_roles (user_id, role_id) values (1, 1);
+insert into user_roles (user_id, role_id) values (2, 2);
