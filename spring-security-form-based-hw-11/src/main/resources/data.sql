@@ -19,3 +19,7 @@ insert into books (`name`, author_id, genre_id) values ('Джейн Эйр', 3, 
 
 insert into comments (text, book_id) values ('Концовка норм :)', 1);
 insert into comments (text, book_id) values ('Один из лучших романов классической английской литературы.', 8);
+
+insert into users (login, password) values ('user', '$2y$12$kEFfx0yBfPoi.ifh5UIVg.R8dV2HXkqNZQ07JbnFa6u08k.gjy0Zi');
+insert into roles (role) values ('user');
+insert into user_roles(user_id, role_id) values (1, 1);
