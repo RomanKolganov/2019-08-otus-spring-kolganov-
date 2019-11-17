@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/Semantic-UI/2.4.1/semantic.js"></script>
+    <script src="/js/main.js"></script>
+    <link href="/webjars/Semantic-UI/2.4.1/semantic.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <title>403</title>
+</head>
+<body>
+<div th:insert="~{menu :: menu}"></div>
+<div class="ui container">
+    <h1 class="ui header">Проблемы с доступом</h1>
+    <p th:text="${message}">Доступ закрыт</p>
+</div>
+</body>
+</html>
