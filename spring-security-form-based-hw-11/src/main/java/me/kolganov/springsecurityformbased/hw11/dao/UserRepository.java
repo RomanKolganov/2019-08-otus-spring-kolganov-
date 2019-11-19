@@ -1,8 +1,10 @@
 package me.kolganov.springsecurityformbased.hw11.dao;
 
-import me.kolganov.springsecurityformbased.hw11.domain.User;
+import me.kolganov.springsecurityformbased.hw11.domain.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByLogin(String login);
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<AppUser, Long> {
+    Optional<AppUser> findByLogin(String login);
 }

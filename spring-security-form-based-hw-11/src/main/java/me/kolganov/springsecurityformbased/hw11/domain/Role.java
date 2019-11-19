@@ -12,7 +12,7 @@ public class Role {
     @Column(name = "role")
     private String role;
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private List<AppUser> appUsers;
 
     public Role() {
     }
@@ -33,11 +33,11 @@ public class Role {
         this.role = role;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<AppUser> getAppUsers() {
+        return appUsers;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setAppUsers(List<AppUser> appUsers) {
+        this.appUsers = appUsers;
     }
 }

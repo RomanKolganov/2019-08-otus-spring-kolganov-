@@ -8,7 +8,7 @@ import java.security.Principal;
 
 @Controller
 public class AccessDeniedController {
-    @RequestMapping(value = "/403")
+    @RequestMapping(value = "/access_denied")
     public String accessDenied(Model model, Principal principal) {
         if (principal != null) {
             String message = "Привет, " + principal.getName() + ", у тебя нет таких полномочий!";
