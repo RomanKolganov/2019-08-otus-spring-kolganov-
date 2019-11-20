@@ -17,6 +17,6 @@ public class AccessDeniedController {
             String message = "Привет, у тебя нет таких полномочий!";
             model.addAttribute("message", message);
         }
-        return "403";
+        return "accessDenied";
     }
 }
