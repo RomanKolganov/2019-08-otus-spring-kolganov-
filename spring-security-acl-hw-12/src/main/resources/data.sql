@@ -28,3 +28,25 @@ insert into roles (role) values ('ADMIN');
 
 insert into user_roles (user_id, role_id) values (1, 1);
 insert into user_roles (user_id, role_id) values (2, 2);
+
+insert into acl_sid (id, principal, sid) values
+(1, 1, 'ADMIN'),
+(2, 1, 'USER'),
+(3, 0, 'SOMEONE');
+
+insert into acl_class (id, class) values
+(1, 'me.kolganov.springsecurityaclhw12.domain.Author');
+
+insert into acl_object_identity (id, object_id_class, object_id_identity, parent_object, owner_sid, entries_inheriting) values
+(1, 1, 1, NULL, 3, 0),
+(2, 1, 2, NULL, 3, 0),
+(3, 1, 3, NULL, 3, 0);
+
+insert into acl_entry (id, acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) values
+(1, 1, 1, 1, 1, 1, 1, 1),
+(2, 1, 2, 1, 2, 1, 1, 1),
+(3, 1, 3, 3, 1, 1, 1, 1),
+(4, 2, 1, 2, 1, 1, 1, 1),
+(5, 2, 2, 3, 1, 1, 1, 1),
+(6, 3, 1, 3, 1, 1, 1, 1),
+(7, 3, 2, 3, 2, 1, 1, 1);
