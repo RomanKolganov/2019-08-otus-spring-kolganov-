@@ -2,6 +2,8 @@ package me.kolganov.springsecurityaclhw12.service;
 
 import me.kolganov.springsecurityaclhw12.dao.AuthorDAO;
 import me.kolganov.springsecurityaclhw12.domain.Author;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +33,9 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void update(Author author) {
+    @PreAuthorize("hasPermission(#author, 'write') or " +
+            "hasRole('ADMIN')")
+    public void update(@Param("author") Author author) {
         Optional<Author> oldAuthor = dao.findById(author.getId());
         oldAuthor.ifPresent(a -> {
             a.setName(author.getName());
