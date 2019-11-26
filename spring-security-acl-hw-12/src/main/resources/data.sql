@@ -41,5 +41,5 @@ INSERT INTO acl_object_identity (id, object_id_class, object_id_identity, parent
 (2, 1, 2, NULL, 1, 0);--класс Author, id=2, ROLE_ADMIN
 
 INSERT INTO acl_entry (id, acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) VALUES
-(1, 1, 2, 2, 2, 1, 1, 1),--разрешили ROLE_USER CREATE id=1 класса Author
+(1, 1, 1, 2, 2, 1, 1, 1),--разрешили ROLE_USER CREATE id=1 класса Author
 (2, 2, 1, 2, 2, 1, 1, 1);--разрешили ROLE_USER CREATE id=2 класса Author

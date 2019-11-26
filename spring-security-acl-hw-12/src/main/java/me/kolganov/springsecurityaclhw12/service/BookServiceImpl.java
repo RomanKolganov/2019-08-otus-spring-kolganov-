@@ -6,6 +6,7 @@ import me.kolganov.springsecurityaclhw12.dao.GenreDAO;
 import me.kolganov.springsecurityaclhw12.domain.Author;
 import me.kolganov.springsecurityaclhw12.domain.Book;
 import me.kolganov.springsecurityaclhw12.domain.Genre;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void save(Book book, long authorId, long genreId) {
         Optional<Author> author = authorDAO.findById(authorId);
         Optional<Genre> genre = genreDAO.findById(genreId);
@@ -45,6 +47,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void update(Book book, long authorId, long genreId) {
         Optional<Book> bookFromDb = bookDAO.findById(book.getId());
         Optional<Author> author = authorDAO.findById(authorId);
@@ -59,6 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(long id) {
         bookDAO.deleteById(id);
     }

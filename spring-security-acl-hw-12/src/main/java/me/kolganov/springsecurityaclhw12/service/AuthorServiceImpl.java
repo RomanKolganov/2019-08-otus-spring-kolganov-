@@ -28,6 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void save(Author author) {
         dao.save(author);
     }
@@ -44,6 +45,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(long id) {
         dao.deleteById(id);
     }

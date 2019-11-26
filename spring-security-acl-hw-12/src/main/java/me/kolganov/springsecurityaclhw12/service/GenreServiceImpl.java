@@ -2,6 +2,8 @@ package me.kolganov.springsecurityaclhw12.service;
 
 import me.kolganov.springsecurityaclhw12.dao.GenreDAO;
 import me.kolganov.springsecurityaclhw12.domain.Genre;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,11 +28,13 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void save(Genre genre) {
         dao.save(genre);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void update(Genre genre) {
         Optional<Genre> oldGenre = dao.findById(genre.getId());
         oldGenre.ifPresent(g -> {
@@ -40,6 +44,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(long id) {
         dao.deleteById(id);
     }
