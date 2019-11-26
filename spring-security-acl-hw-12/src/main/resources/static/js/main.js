@@ -36,6 +36,9 @@ function deleteEntity(url, table) {
         type: 'DELETE',
         success: function () {
             table.DataTable().ajax.reload();
+        },
+        error: function() {
+            $('#accessDeniedSidebar').sidebar('toggle');
         }
     });
 }
@@ -47,6 +50,9 @@ function createEntity(url, data, table) {
         data: data,
         success: function () {
             table.DataTable().ajax.reload();
+        },
+        error: function() {
+            $('#accessDeniedSidebar').sidebar('toggle');
         }
     });
 }
@@ -59,6 +65,9 @@ function updateEntity(url, data, table) {
         data: JSON.stringify(data),
         success: function () {
             table.DataTable().ajax.reload();
+        },
+        error: function() {
+            $('#accessDeniedSidebar').sidebar('toggle');
         }
     });
 }
