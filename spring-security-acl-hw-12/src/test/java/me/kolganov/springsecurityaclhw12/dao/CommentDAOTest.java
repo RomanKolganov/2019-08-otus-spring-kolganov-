@@ -1,7 +1,5 @@
-package me.kolganov.springmvcview.dao;
+package me.kolganov.springsecurityaclhw12.dao;
 
-import me.kolganov.springsecurityaclhw12.dao.BookDAO;
-import me.kolganov.springsecurityaclhw12.dao.CommentDAO;
 import me.kolganov.springsecurityaclhw12.domain.Book;
 import me.kolganov.springsecurityaclhw12.domain.Comment;
 import org.junit.jupiter.api.DisplayName;

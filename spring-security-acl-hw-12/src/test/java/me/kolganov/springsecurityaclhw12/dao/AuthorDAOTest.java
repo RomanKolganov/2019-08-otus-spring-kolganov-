@@ -1,7 +1,6 @@
 
-package me.kolganov.springmvcview.dao;
+package me.kolganov.springsecurityaclhw12.dao;
 
-import me.kolganov.springsecurityaclhw12.dao.AuthorDAO;
 import me.kolganov.springsecurityaclhw12.domain.Author;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

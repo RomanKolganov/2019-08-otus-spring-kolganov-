@@ -1,8 +1,7 @@
-package me.kolganov.springmvcview.page;
+package me.kolganov.springsecurityaclhw12.page;
 
 import me.kolganov.springsecurityaclhw12.config.security.CustomUserDetailsService;
 import me.kolganov.springsecurityaclhw12.dao.UserRepository;
-import me.kolganov.springsecurityaclhw12.page.CommentPageController;
 import me.kolganov.springsecurityaclhw12.service.BookService;
 import me.kolganov.springsecurityaclhw12.service.CommentService;
 import org.junit.jupiter.api.DisplayName;

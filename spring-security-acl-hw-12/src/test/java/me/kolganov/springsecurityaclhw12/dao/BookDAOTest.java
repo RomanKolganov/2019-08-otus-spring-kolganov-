@@ -1,8 +1,5 @@
-package me.kolganov.springmvcview.dao;
+package me.kolganov.springsecurityaclhw12.dao;
 
-import me.kolganov.springsecurityaclhw12.dao.AuthorDAO;
-import me.kolganov.springsecurityaclhw12.dao.BookDAO;
-import me.kolganov.springsecurityaclhw12.dao.GenreDAO;
 import me.kolganov.springsecurityaclhw12.domain.Author;
 import me.kolganov.springsecurityaclhw12.domain.Book;
 import me.kolganov.springsecurityaclhw12.domain.Genre;

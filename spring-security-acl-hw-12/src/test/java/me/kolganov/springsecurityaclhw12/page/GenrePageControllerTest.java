@@ -1,9 +1,8 @@
-package me.kolganov.springmvcview.page;
+package me.kolganov.springsecurityaclhw12.page;
 
 import me.kolganov.springsecurityaclhw12.config.security.CustomUserDetailsService;
 import me.kolganov.springsecurityaclhw12.dao.UserRepository;
-import me.kolganov.springsecurityaclhw12.page.AuthorPageController;
-import me.kolganov.springsecurityaclhw12.service.AuthorService;
+import me.kolganov.springsecurityaclhw12.service.GenreService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@DisplayName("Контроллер для работы с авторами ")
-@WebMvcTest(AuthorPageController.class)
-class AuthorPageControllerTest {
+@DisplayName("Контроллер для работы с жанрами ")
+@WebMvcTest(GenrePageController.class)
+class GenrePageControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private AuthorService authorService;
+    private GenreService genreService;
     @MockBean
     private UserRepository userRepository;
     @MockBean
@@ -34,11 +33,11 @@ class AuthorPageControllerTest {
     )
 
     @Test
-    @DisplayName("должен возвращать шаблон author.html при обращении")
-    void shouldReturnAuthorWhenAccessing() throws Exception {
-        mockMvc.perform(get("/authors"))
+    @DisplayName("должен возвращать шаблон genre.html при обращении")
+    void shouldReturnGenreWhenAccessing() throws Exception {
+        mockMvc.perform(get("/genres"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("author"))
-                .andExpect(content().string(containsString("Авторы")));
+                .andExpect(view().name("genre"))
+                .andExpect(content().string(containsString("Жанры")));
     }
 }
