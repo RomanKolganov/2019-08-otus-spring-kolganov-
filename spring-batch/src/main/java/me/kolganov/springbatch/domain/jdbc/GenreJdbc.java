@@ -15,19 +15,6 @@ public class GenreJdbc {
     @OneToMany(mappedBy = "genreJdbc", cascade = CascadeType.ALL)
     private List<BookJdbc> bookJdbcs;
 
-    public GenreJdbc(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public GenreJdbc(long id) {
-        this.id = id;
-    }
-
-    public GenreJdbc(String name) {
-        this.name = name;
-    }
-
     public GenreJdbc(){
     }
 

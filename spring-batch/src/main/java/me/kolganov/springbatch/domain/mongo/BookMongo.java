@@ -21,29 +21,15 @@ public class BookMongo {
     @Field("genres")
     private GenreMongo genreMongo;
 
-    public BookMongo(String name) {
-        this.name = name;
-    }
-
-    public BookMongo(String id, String name) {
+    public BookMongo(String id, String name, AuthorMongo authorMongo, GenreMongo genreMongo) {
         this.id = id;
-        this.name = name;
-    }
-
-    public BookMongo(String id, GenreMongo genreMongo) {
-        this.id = id;
-        this.genreMongo = genreMongo;
-    }
-
-    public BookMongo(String id, AuthorMongo authorMongo) {
-        this.id = id;
-        this.authorMongo = authorMongo;
-    }
-
-    public BookMongo(String name, AuthorMongo authorMongo, GenreMongo genreMongo) {
         this.name = name;
         this.authorMongo = authorMongo;
         this.genreMongo = genreMongo;
+    }
+
+    public BookMongo(String id) {
+        this.id = id;
     }
 
     public BookMongo() {

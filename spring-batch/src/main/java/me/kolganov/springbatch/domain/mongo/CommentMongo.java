@@ -17,11 +17,8 @@ public class CommentMongo {
     @Field("books")
     private BookMongo bookMongo;
 
-    public CommentMongo(String text) {
-        this.text = text;
-    }
-
-    public CommentMongo(String text, BookMongo bookMongo) {
+    public CommentMongo(String id, String text, BookMongo bookMongo) {
+        this.id = id;
         this.text = text;
         this.bookMongo = bookMongo;
     }

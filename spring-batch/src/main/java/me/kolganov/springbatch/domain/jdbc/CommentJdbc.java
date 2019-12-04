@@ -15,15 +15,6 @@ public class CommentJdbc {
     @JoinColumn(name = "book_id")
     private BookJdbc bookJdbc;
 
-    public CommentJdbc(long id, String text) {
-        this.id = id;
-        this.text = text;
-    }
-
-    public CommentJdbc(String text) {
-        this.text = text;
-    }
-
     public CommentJdbc() {
     }
 

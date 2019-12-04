@@ -17,8 +17,8 @@ public class AuthorMongo {
         this.name = name;
     }
 
-    public AuthorMongo(String name) {
-        this.name = name;
+    public AuthorMongo(String id) {
+        this.id = id;
     }
 
     public AuthorMongo() {

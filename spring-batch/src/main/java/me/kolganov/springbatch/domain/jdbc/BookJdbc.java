@@ -22,25 +22,6 @@ public class BookJdbc {
     @OneToMany(mappedBy = "bookJdbc", cascade = CascadeType.ALL)
     private List<CommentJdbc> commentJdbcs;
 
-    public BookJdbc(String name) {
-        this.name = name;
-    }
-
-    public BookJdbc(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public BookJdbc(long id, GenreJdbc genreJdbc) {
-        this.id = id;
-        this.genreJdbc = genreJdbc;
-    }
-
-    public BookJdbc(long id, AuthorJdbc authorJdbc) {
-        this.id = id;
-        this.authorJdbc = authorJdbc;
-    }
-
     public BookJdbc() {
     }
 

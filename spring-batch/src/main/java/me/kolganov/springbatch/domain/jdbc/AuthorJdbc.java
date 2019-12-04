@@ -15,19 +15,6 @@ public class AuthorJdbc {
     @OneToMany(mappedBy = "authorJdbc", cascade = CascadeType.ALL)
     private List<BookJdbc> bookJdbcs;
 
-    public AuthorJdbc(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public AuthorJdbc(long id) {
-        this.id = id;
-    }
-
-    public AuthorJdbc(String name) {
-        this.name = name;
-    }
-
     public AuthorJdbc() {
     }
 

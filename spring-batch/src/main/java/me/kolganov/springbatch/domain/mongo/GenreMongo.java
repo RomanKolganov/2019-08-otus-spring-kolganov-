@@ -17,8 +17,8 @@ public class GenreMongo {
         this.name = name;
     }
 
-    public GenreMongo(String name) {
-        this.name = name;
+    public GenreMongo(String id) {
+        this.id = id;
     }
 
     public GenreMongo(){
