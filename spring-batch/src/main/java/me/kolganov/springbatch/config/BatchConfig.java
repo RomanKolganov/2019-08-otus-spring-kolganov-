@@ -131,36 +131,36 @@ public class BatchConfig {
     }
 
     @Bean
-    public Step authorStep(MongoItemWriter authorWriter, JpaPagingItemReader authorReader, ItemProcessor authorProcessor) {
+    public Step authorStep(MongoItemWriter<AuthorMongo> authorWriter, JpaPagingItemReader<AuthorJdbc> authorReader, ItemProcessor<AuthorJdbc, AuthorMongo> authorProcessor) {
         return stepBuilderFactory.get("authorStep")
-                .chunk(5)
+                .<AuthorJdbc, AuthorMongo>chunk(5)
                 .reader(authorReader)
                 .processor(authorProcessor)
                 .writer(authorWriter)
                 .build();
     }
     @Bean
-    public Step genreStep(MongoItemWriter genreWriter, JpaPagingItemReader genreReader, ItemProcessor genreProcessor) {
+    public Step genreStep(MongoItemWriter<GenreMongo> genreWriter, JpaPagingItemReader<GenreJdbc> genreReader, ItemProcessor<GenreJdbc, GenreMongo> genreProcessor) {
         return stepBuilderFactory.get("genreStep")
-                .chunk(5)
+                .<GenreJdbc, GenreMongo>chunk(5)
                 .reader(genreReader)
                 .processor(genreProcessor)
                 .writer(genreWriter)
                 .build();
     }
     @Bean
-    public Step bookStep(MongoItemWriter bookWriter, JpaPagingItemReader bookReader, ItemProcessor bookProcessor) {
+    public Step bookStep(MongoItemWriter<BookMongo> bookWriter, JpaPagingItemReader<BookJdbc> bookReader, ItemProcessor<BookJdbc, BookMongo> bookProcessor) {
         return stepBuilderFactory.get("bookStep")
-                .chunk(5)
+                .<BookJdbc, BookMongo>chunk(5)
                 .reader(bookReader)
                 .processor(bookProcessor)
                 .writer(bookWriter)
                 .build();
     }
     @Bean
-    public Step commentStep(MongoItemWriter commentWriter, JpaPagingItemReader commentReader, ItemProcessor commentProcessor) {
+    public Step commentStep(MongoItemWriter<CommentMongo> commentWriter, JpaPagingItemReader<CommentJdbc> commentReader, ItemProcessor<CommentJdbc, CommentMongo> commentProcessor) {
         return stepBuilderFactory.get("commentStep")
-                .chunk(5)
+                .<CommentJdbc, CommentMongo>chunk(5)
                 .reader(commentReader)
                 .processor(commentProcessor)
                 .writer(commentWriter)

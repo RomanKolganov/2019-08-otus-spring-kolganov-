@@ -18,5 +18,8 @@ insert into books (`name`, author_id, genre_id) values ('Герой нашего
 
 insert into books (`name`, author_id, genre_id) values ('Джейн Эйр', 3, 3);
 
+insert into books (`name`, author_id, genre_id) values ('Последнее желание', 4, 3);
+
 insert into comments (text, book_id) values ('Концовка норм :)', 1);
 insert into comments (text, book_id) values ('Один из лучших романов классической английской литературы.', 8);
+insert into comments (text, book_id) values ('Геральт мужик...', 9);
