@@ -12,8 +12,18 @@ spring:
 #    username: app_user
 #    password:
 #    initialization-mode: always
+
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: metrics, health, loggers
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  application:
+    name: spring-actuator
+    description: spring boot actuator application
+    version: 0.0.1-SNAPSHOT
