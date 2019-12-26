@@ -12,3 +12,8 @@ spring:
 #    username: app_user
 #    password:
 #    initialization-mode: always
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
