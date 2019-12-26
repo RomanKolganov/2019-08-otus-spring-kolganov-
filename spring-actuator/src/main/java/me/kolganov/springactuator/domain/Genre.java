@@ -1,0 +1,65 @@
+package me.kolganov.springactuator.domain;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "genres")
+public class Genre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    private List<Book> books;
+
+    public Genre(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Genre(long id) {
+        this.id = id;
+    }
+
+    public Genre(String name) {
+        this.name = name;
+    }
+
+    public Genre(){
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
