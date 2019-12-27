@@ -18,6 +18,8 @@ management:
     web:
       exposure:
         include: metrics, health, loggers
+      base-path: /spy
+
   endpoint:
     health:
       show-details: always
