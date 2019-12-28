@@ -1,5 +1,7 @@
 package me.kolganov.springactuator.domain;
 
+import net.minidev.json.JSONObject;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -53,5 +55,14 @@ public class AppUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("login", login);
+        jsonObject.put("password", password);
+        jsonObject.put("roles", roles.stream().map(Role::getRole));
+        return jsonObject;
     }
 }
