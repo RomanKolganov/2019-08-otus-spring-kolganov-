@@ -17,7 +17,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: metrics, health, loggers
+        include: "*"
       base-path: /spy
 
   endpoint:
@@ -29,3 +29,6 @@ info:
     name: spring-actuator
     description: spring boot actuator application
     version: 0.0.1-SNAPSHOT
+
+logging:
+  file: ./target/logs/actuator.log
