@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +17,13 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorDAO dao;
 
-    @HystrixCommand(commandKey="getRentsKey", fallbackMethod="buildFallbackRents")
+    @HystrixCommand(commandKey="getAuthorsKey", fallbackMethod="buildFallbackAuthors")
     @Override
     public List<Author> getAll() {
         return dao.findAll();
     }
 
+    @HystrixCommand(commandKey="getAuthorsKey", fallbackMethod="buildFallbackAuthors")
     @Override
     public Author getById(long id) {
         return dao.findById(id).orElseGet(Author::new);
@@ -50,15 +52,9 @@ public class AuthorServiceImpl implements AuthorService {
         dao.deleteById(id);
     }
 
-//    public List<Author> buildFallbackRents(String animal) {
-//        Author rent = new Author();
-//        rent.setId(0L);
-//        rent.setAnimal(animal);
-//        rent.setCustomer("N/A");
-//        rent.setStartDate("N/A");
-//        rent.setEndDate("N/A");
-//        List<Rent> rents = new ArrayList<>();
-//        rents.add(rent);
-//        return rents;
-//    }
+    public List<Author> buildFallbackAuthors() {
+        List<Author> rents = new ArrayList<>();
+        rents.add(Author.builder().id(0).name("N/A").build());
+        return rents;
+    }
 }
